@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldsmsoft.framework.dao.mybatis.dao.AuthClientBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.ldsmsoft.framework.dao.mybatis.model.AuthClientBean" >
+    <id column="AUTH_ID" property="authId" jdbcType="DECIMAL" />
+    <result column="CLIENT_ID" property="clientId" jdbcType="VARCHAR" />
+    <result column="CLENT_NAME" property="clentName" jdbcType="VARCHAR" />
+    <result column="CLIENT_SECRET" property="clientSecret" jdbcType="VARCHAR" />
+    <result column="INVALIDTIME" property="invalidTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    AUTH_ID, CLIENT_ID, CLENT_NAME, CLIENT_SECRET, INVALIDTIME
+  </sql>
+  <select id="validateAuth" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from QMCB.SYS_AUTHCLIENT
+    where CLIENT_ID = #{clientId,jdbcType=VARCHAR}
+    and CLIENT_SECRET = #{clientSecret,jdbcType=VARCHAR}
+    and INVALIDTIME &gt;=sysdate
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from QMCB.SYS_AUTHCLIENT
+    where AUTH_ID = #{authId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from QMCB.SYS_AUTHCLIENT
+    where AUTH_ID = #{authId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.AuthClientBean" >
+    insert into QMCB.SYS_AUTHCLIENT (AUTH_ID, CLIENT_ID, CLENT_NAME, 
+      CLIENT_SECRET)
+    values (#{authId,jdbcType=DECIMAL}, #{clientId,jdbcType=VARCHAR}, #{clentName,jdbcType=VARCHAR}, 
+      #{clientSecret,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.AuthClientBean" >
+    insert into QMCB.SYS_AUTHCLIENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="authId != null" >
+        AUTH_ID,
+      </if>
+      <if test="clientId != null" >
+        CLIENT_ID,
+      </if>
+      <if test="clentName != null" >
+        CLENT_NAME,
+      </if>
+      <if test="clientSecret != null" >
+        CLIENT_SECRET,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="authId != null" >
+        #{authId,jdbcType=DECIMAL},
+      </if>
+      <if test="clientId != null" >
+        #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="clentName != null" >
+        #{clentName,jdbcType=VARCHAR},
+      </if>
+      <if test="clientSecret != null" >
+        #{clientSecret,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.AuthClientBean" >
+    update QMCB.SYS_AUTHCLIENT
+    <set >
+      <if test="clientId != null" >
+        CLIENT_ID = #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="clentName != null" >
+        CLENT_NAME = #{clentName,jdbcType=VARCHAR},
+      </if>
+      <if test="clientSecret != null" >
+        CLIENT_SECRET = #{clientSecret,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where AUTH_ID = #{authId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.AuthClientBean" >
+    update QMCB.SYS_AUTHCLIENT
+    set CLIENT_ID = #{clientId,jdbcType=VARCHAR},
+      CLENT_NAME = #{clentName,jdbcType=VARCHAR},
+      CLIENT_SECRET = #{clientSecret,jdbcType=VARCHAR}
+    where AUTH_ID = #{authId,jdbcType=DECIMAL}
+  </update>
+</mapper>

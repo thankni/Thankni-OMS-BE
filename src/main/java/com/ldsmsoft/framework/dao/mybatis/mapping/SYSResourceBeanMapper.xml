@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldsmsoft.framework.dao.mybatis.dao.SYSResourceBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.ldsmsoft.framework.dao.mybatis.model.SYSResourceBean" >
+    <id column="RESOURCE_ID" property="resourceId" jdbcType="DECIMAL" />
+    <result column="RESOURCE_NAME" property="resourceName" jdbcType="VARCHAR" />
+    <result column="DISCRIPTION" property="discription" jdbcType="VARCHAR" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="PRAENTID" property="praentid" jdbcType="DECIMAL" />
+    <result column="CREATEUSER" property="createuser" jdbcType="DECIMAL" />
+    <result column="CREATEDTM" property="createdtm" jdbcType="DATE" />
+    <result column="UPDATEUSER" property="updateuser" jdbcType="DECIMAL" />
+    <result column="UPDATEDTM" property="updatedtm" jdbcType="DATE" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="HASHCODE" property="hashcode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RESOURCE_ID, RESOURCE_NAME, DISCRIPTION, URL, TYPE, PRAENTID, CREATEUSER, CREATEDTM, 
+    UPDATEUSER, UPDATEDTM, STATUS, HASHCODE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from QMCB.SYS_RESOURCE
+    where RESOURCE_ID = #{resourceId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from QMCB.SYS_RESOURCE
+    where RESOURCE_ID = #{resourceId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSResourceBean" >
+    insert into QMCB.SYS_RESOURCE (RESOURCE_ID, RESOURCE_NAME, DISCRIPTION, 
+      URL, TYPE, PRAENTID, 
+      CREATEUSER, CREATEDTM, UPDATEUSER, 
+      UPDATEDTM, STATUS, HASHCODE
+      )
+    values (#{resourceId,jdbcType=DECIMAL}, #{resourceName,jdbcType=VARCHAR}, #{discription,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{praentid,jdbcType=DECIMAL}, 
+      #{createuser,jdbcType=DECIMAL}, #{createdtm,jdbcType=DATE}, #{updateuser,jdbcType=DECIMAL}, 
+      #{updatedtm,jdbcType=DATE}, #{status,jdbcType=VARCHAR}, #{hashcode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSResourceBean" >
+    insert into QMCB.SYS_RESOURCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resourceId != null" >
+        RESOURCE_ID,
+      </if>
+      <if test="resourceName != null" >
+        RESOURCE_NAME,
+      </if>
+      <if test="discription != null" >
+        DISCRIPTION,
+      </if>
+      <if test="url != null" >
+        URL,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="praentid != null" >
+        PRAENTID,
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER,
+      </if>
+      <if test="createdtm != null" >
+        CREATEDTM,
+      </if>
+      <if test="updateuser != null" >
+        UPDATEUSER,
+      </if>
+      <if test="updatedtm != null" >
+        UPDATEDTM,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="hashcode != null" >
+        HASHCODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resourceId != null" >
+        #{resourceId,jdbcType=DECIMAL},
+      </if>
+      <if test="resourceName != null" >
+        #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="discription != null" >
+        #{discription,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="praentid != null" >
+        #{praentid,jdbcType=DECIMAL},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=DECIMAL},
+      </if>
+      <if test="createdtm != null" >
+        #{createdtm,jdbcType=DATE},
+      </if>
+      <if test="updateuser != null" >
+        #{updateuser,jdbcType=DECIMAL},
+      </if>
+      <if test="updatedtm != null" >
+        #{updatedtm,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="hashcode != null" >
+        #{hashcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSResourceBean" >
+    update QMCB.SYS_RESOURCE
+    <set >
+      <if test="resourceName != null" >
+        RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="discription != null" >
+        DISCRIPTION = #{discription,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="praentid != null" >
+        PRAENTID = #{praentid,jdbcType=DECIMAL},
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER = #{createuser,jdbcType=DECIMAL},
+      </if>
+      <if test="createdtm != null" >
+        CREATEDTM = #{createdtm,jdbcType=DATE},
+      </if>
+      <if test="updateuser != null" >
+        UPDATEUSER = #{updateuser,jdbcType=DECIMAL},
+      </if>
+      <if test="updatedtm != null" >
+        UPDATEDTM = #{updatedtm,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="hashcode != null" >
+        HASHCODE = #{hashcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RESOURCE_ID = #{resourceId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSResourceBean" >
+    update QMCB.SYS_RESOURCE
+    set RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR},
+      DISCRIPTION = #{discription,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      PRAENTID = #{praentid,jdbcType=DECIMAL},
+      CREATEUSER = #{createuser,jdbcType=DECIMAL},
+      CREATEDTM = #{createdtm,jdbcType=DATE},
+      UPDATEUSER = #{updateuser,jdbcType=DECIMAL},
+      UPDATEDTM = #{updatedtm,jdbcType=DATE},
+      STATUS = #{status,jdbcType=VARCHAR},
+      HASHCODE = #{hashcode,jdbcType=VARCHAR}
+    where RESOURCE_ID = #{resourceId,jdbcType=DECIMAL}
+  </update>
+</mapper>

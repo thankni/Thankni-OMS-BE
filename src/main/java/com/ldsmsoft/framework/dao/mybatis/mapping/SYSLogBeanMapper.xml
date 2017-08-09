@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldsmsoft.framework.dao.mybatis.dao.SYSLogBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.ldsmsoft.framework.dao.mybatis.model.SYSLogBean" >
+    <id column="LOG_ID" property="logId" jdbcType="DECIMAL" />
+    <result column="ARGS_IN" property="argsIn" jdbcType="OTHER" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="MSG" property="msg" jdbcType="OTHER" />
+    <result column="DTM" property="dtm" jdbcType="DATE" />
+    <result column="ZHSQ_NAME" property="zhsqName" jdbcType="VARCHAR" />
+    <result column="RESULT_OUT" property="resultOut" jdbcType="OTHER" />
+    <result column="CLIENTID" property="clientid" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    LOG_ID, ARGS_IN, CODE, MSG, DTM, ZHSQ_NAME, RESULT_OUT, CLIENTID, USER_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from QMCB.SYS_LOG
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from QMCB.SYS_LOG
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSLogBean" >
+    insert into QMCB.SYS_LOG (LOG_ID, ARGS_IN, CODE, 
+      MSG, DTM, ZHSQ_NAME, RESULT_OUT, 
+      CLIENTID, USER_ID)
+    values (#{logId,jdbcType=DECIMAL}, #{argsIn,jdbcType=OTHER}, #{code,jdbcType=VARCHAR}, 
+      #{msg,jdbcType=OTHER}, #{dtm,jdbcType=DATE}, #{zhsqName,jdbcType=VARCHAR}, #{resultOut,jdbcType=OTHER}, 
+      #{clientid,jdbcType=VARCHAR}, #{userId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSLogBean" >
+    insert into QMCB.SYS_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        LOG_ID,
+      </if>
+      <if test="argsIn != null" >
+        ARGS_IN,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="msg != null" >
+        MSG,
+      </if>
+      <if test="dtm != null" >
+        DTM,
+      </if>
+      <if test="zhsqName != null" >
+        ZHSQ_NAME,
+      </if>
+      <if test="resultOut != null" >
+        RESULT_OUT,
+      </if>
+      <if test="clientid != null" >
+        CLIENTID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=DECIMAL},
+      </if>
+      <if test="argsIn != null" >
+        #{argsIn,jdbcType=OTHER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        #{msg,jdbcType=OTHER},
+      </if>
+      <if test="dtm != null" >
+        #{dtm,jdbcType=DATE},
+      </if>
+      <if test="zhsqName != null" >
+        #{zhsqName,jdbcType=VARCHAR},
+      </if>
+      <if test="resultOut != null" >
+        #{resultOut,jdbcType=OTHER},
+      </if>
+      <if test="clientid != null" >
+        #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSLogBean" >
+    update QMCB.SYS_LOG
+    <set >
+      <if test="argsIn != null" >
+        ARGS_IN = #{argsIn,jdbcType=OTHER},
+      </if>
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        MSG = #{msg,jdbcType=OTHER},
+      </if>
+      <if test="dtm != null" >
+        DTM = #{dtm,jdbcType=DATE},
+      </if>
+      <if test="zhsqName != null" >
+        ZHSQ_NAME = #{zhsqName,jdbcType=VARCHAR},
+      </if>
+      <if test="resultOut != null" >
+        RESULT_OUT = #{resultOut,jdbcType=OTHER},
+      </if>
+      <if test="clientid != null" >
+        CLIENTID = #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSLogBean" >
+    update QMCB.SYS_LOG
+    set ARGS_IN = #{argsIn,jdbcType=OTHER},
+      CODE = #{code,jdbcType=VARCHAR},
+      MSG = #{msg,jdbcType=OTHER},
+      DTM = #{dtm,jdbcType=DATE},
+      ZHSQ_NAME = #{zhsqName,jdbcType=VARCHAR},
+      RESULT_OUT = #{resultOut,jdbcType=OTHER},
+      CLIENTID = #{clientid,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=DECIMAL}
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </update>
+</mapper>

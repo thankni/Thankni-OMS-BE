@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldsmsoft.framework.dao.mybatis.dao.SYSRoleBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.ldsmsoft.framework.dao.mybatis.model.SYSRoleBean" >
+    <id column="ROLE_ID" property="roleId" jdbcType="DECIMAL" />
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+    <result column="DISCRIPTION" property="discription" jdbcType="VARCHAR" />
+    <result column="CREATEUSER" property="createuser" jdbcType="DECIMAL" />
+    <result column="CREATEDTM" property="createdtm" jdbcType="DATE" />
+    <result column="UPDATEUSER" property="updateuser" jdbcType="DECIMAL" />
+    <result column="UPDATEDTM" property="updatedtm" jdbcType="DATE" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="HASHCODE" property="hashcode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROLE_ID, ROLE_NAME, DISCRIPTION, CREATEUSER, CREATEDTM, UPDATEUSER, UPDATEDTM, STATUS, 
+    HASHCODE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from QMCB.SYS_ROLE
+    where ROLE_ID = #{roleId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from QMCB.SYS_ROLE
+    where ROLE_ID = #{roleId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSRoleBean" >
+    insert into QMCB.SYS_ROLE (ROLE_ID, ROLE_NAME, DISCRIPTION, 
+      CREATEUSER, CREATEDTM, UPDATEUSER, 
+      UPDATEDTM, STATUS, HASHCODE
+      )
+    values (#{roleId,jdbcType=DECIMAL}, #{roleName,jdbcType=VARCHAR}, #{discription,jdbcType=VARCHAR}, 
+      #{createuser,jdbcType=DECIMAL}, #{createdtm,jdbcType=DATE}, #{updateuser,jdbcType=DECIMAL}, 
+      #{updatedtm,jdbcType=DATE}, #{status,jdbcType=VARCHAR}, #{hashcode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSRoleBean" >
+    insert into QMCB.SYS_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="roleName != null" >
+        ROLE_NAME,
+      </if>
+      <if test="discription != null" >
+        DISCRIPTION,
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER,
+      </if>
+      <if test="createdtm != null" >
+        CREATEDTM,
+      </if>
+      <if test="updateuser != null" >
+        UPDATEUSER,
+      </if>
+      <if test="updatedtm != null" >
+        UPDATEDTM,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="hashcode != null" >
+        HASHCODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="discription != null" >
+        #{discription,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=DECIMAL},
+      </if>
+      <if test="createdtm != null" >
+        #{createdtm,jdbcType=DATE},
+      </if>
+      <if test="updateuser != null" >
+        #{updateuser,jdbcType=DECIMAL},
+      </if>
+      <if test="updatedtm != null" >
+        #{updatedtm,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="hashcode != null" >
+        #{hashcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSRoleBean" >
+    update QMCB.SYS_ROLE
+    <set >
+      <if test="roleName != null" >
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="discription != null" >
+        DISCRIPTION = #{discription,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER = #{createuser,jdbcType=DECIMAL},
+      </if>
+      <if test="createdtm != null" >
+        CREATEDTM = #{createdtm,jdbcType=DATE},
+      </if>
+      <if test="updateuser != null" >
+        UPDATEUSER = #{updateuser,jdbcType=DECIMAL},
+      </if>
+      <if test="updatedtm != null" >
+        UPDATEDTM = #{updatedtm,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="hashcode != null" >
+        HASHCODE = #{hashcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROLE_ID = #{roleId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSRoleBean" >
+    update QMCB.SYS_ROLE
+    set ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      DISCRIPTION = #{discription,jdbcType=VARCHAR},
+      CREATEUSER = #{createuser,jdbcType=DECIMAL},
+      CREATEDTM = #{createdtm,jdbcType=DATE},
+      UPDATEUSER = #{updateuser,jdbcType=DECIMAL},
+      UPDATEDTM = #{updatedtm,jdbcType=DATE},
+      STATUS = #{status,jdbcType=VARCHAR},
+      HASHCODE = #{hashcode,jdbcType=VARCHAR}
+    where ROLE_ID = #{roleId,jdbcType=DECIMAL}
+  </update>
+</mapper>

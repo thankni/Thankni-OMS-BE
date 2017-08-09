@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=classmate-1.1.0.jar -DpomFile=classmate-1.1.0.pom

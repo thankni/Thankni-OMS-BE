@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldsmsoft.framework.dao.mybatis.dao.SMSProBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.ldsmsoft.framework.dao.mybatis.model.SMSProBean" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="VERSION" property="version" jdbcType="VARCHAR" />
+    <result column="USERTYPE" property="usertype" jdbcType="VARCHAR" />
+    <result column="DOWNURL" property="downurl" jdbcType="VARCHAR" />
+    <result column="UPURL" property="upurl" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="PWD" property="pwd" jdbcType="VARCHAR" />
+    <result column="CORPCODE" property="corpcode" jdbcType="VARCHAR" />
+    <result column="IDENEXPLAIN" property="idenexplain" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, VERSION, USERTYPE, DOWNURL, UPURL, USERNAME, PWD, CORPCODE, IDENEXPLAIN
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from NETREP_GR.SMSPROPERTIES
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from NETREP_GR.SMSPROPERTIES
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SMSProBean" >
+    insert into NETREP_GR.SMSPROPERTIES (ID, VERSION, USERTYPE, 
+      DOWNURL, UPURL, USERNAME, 
+      PWD, CORPCODE, IDENEXPLAIN
+      )
+    values (#{id,jdbcType=DECIMAL}, #{version,jdbcType=VARCHAR}, #{usertype,jdbcType=VARCHAR}, 
+      #{downurl,jdbcType=VARCHAR}, #{upurl,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{pwd,jdbcType=VARCHAR}, #{corpcode,jdbcType=VARCHAR}, #{idenexplain,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SMSProBean" >
+    insert into NETREP_GR.SMSPROPERTIES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="usertype != null" >
+        USERTYPE,
+      </if>
+      <if test="downurl != null" >
+        DOWNURL,
+      </if>
+      <if test="upurl != null" >
+        UPURL,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="pwd != null" >
+        PWD,
+      </if>
+      <if test="corpcode != null" >
+        CORPCODE,
+      </if>
+      <if test="idenexplain != null" >
+        IDENEXPLAIN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=VARCHAR},
+      </if>
+      <if test="downurl != null" >
+        #{downurl,jdbcType=VARCHAR},
+      </if>
+      <if test="upurl != null" >
+        #{upurl,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null" >
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="corpcode != null" >
+        #{corpcode,jdbcType=VARCHAR},
+      </if>
+      <if test="idenexplain != null" >
+        #{idenexplain,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SMSProBean" >
+    update NETREP_GR.SMSPROPERTIES
+    <set >
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        USERTYPE = #{usertype,jdbcType=VARCHAR},
+      </if>
+      <if test="downurl != null" >
+        DOWNURL = #{downurl,jdbcType=VARCHAR},
+      </if>
+      <if test="upurl != null" >
+        UPURL = #{upurl,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null" >
+        PWD = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="corpcode != null" >
+        CORPCODE = #{corpcode,jdbcType=VARCHAR},
+      </if>
+      <if test="idenexplain != null" >
+        IDENEXPLAIN = #{idenexplain,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SMSProBean" >
+    update NETREP_GR.SMSPROPERTIES
+    set VERSION = #{version,jdbcType=VARCHAR},
+      USERTYPE = #{usertype,jdbcType=VARCHAR},
+      DOWNURL = #{downurl,jdbcType=VARCHAR},
+      UPURL = #{upurl,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      PWD = #{pwd,jdbcType=VARCHAR},
+      CORPCODE = #{corpcode,jdbcType=VARCHAR},
+      IDENEXPLAIN = #{idenexplain,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

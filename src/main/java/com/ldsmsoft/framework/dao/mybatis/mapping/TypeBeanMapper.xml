@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldsmsoft.framework.dao.mybatis.dao.TypeBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.ldsmsoft.framework.dao.mybatis.model.TypeBean" >
+    <id column="TYPE_ID" property="typeId" jdbcType="DECIMAL" />
+    <result column="TYPE_NAME" property="typeName" jdbcType="VARCHAR" />
+    <result column="DISCRIPTION" property="discription" jdbcType="VARCHAR" />
+    <result column="CREATEDTM" property="createdtm" jdbcType="DATE" />
+    <result column="CREATEUSER" property="createuser" jdbcType="DECIMAL" />
+    <result column="UPDATEDTM" property="updatedtm" jdbcType="DATE" />
+    <result column="UPDATEUSER" property="updateuser" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TYPE_ID, TYPE_NAME, DISCRIPTION, CREATEDTM, CREATEUSER, UPDATEDTM, UPDATEUSER, STATUS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from QMCB.T_TYPE
+    where TYPE_ID = #{typeId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from QMCB.T_TYPE
+    where TYPE_ID = #{typeId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.TypeBean" >
+    insert into QMCB.T_TYPE (TYPE_ID, TYPE_NAME, DISCRIPTION, 
+      CREATEDTM, CREATEUSER, UPDATEDTM, 
+      UPDATEUSER, STATUS)
+    values (#{typeId,jdbcType=DECIMAL}, #{typeName,jdbcType=VARCHAR}, #{discription,jdbcType=VARCHAR}, 
+      #{createdtm,jdbcType=DATE}, #{createuser,jdbcType=DECIMAL}, #{updatedtm,jdbcType=DATE}, 
+      #{updateuser,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.TypeBean" >
+    insert into QMCB.T_TYPE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="typeId != null" >
+        TYPE_ID,
+      </if>
+      <if test="typeName != null" >
+        TYPE_NAME,
+      </if>
+      <if test="discription != null" >
+        DISCRIPTION,
+      </if>
+      <if test="createdtm != null" >
+        CREATEDTM,
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER,
+      </if>
+      <if test="updatedtm != null" >
+        UPDATEDTM,
+      </if>
+      <if test="updateuser != null" >
+        UPDATEUSER,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="typeId != null" >
+        #{typeId,jdbcType=DECIMAL},
+      </if>
+      <if test="typeName != null" >
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="discription != null" >
+        #{discription,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtm != null" >
+        #{createdtm,jdbcType=DATE},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=DECIMAL},
+      </if>
+      <if test="updatedtm != null" >
+        #{updatedtm,jdbcType=DATE},
+      </if>
+      <if test="updateuser != null" >
+        #{updateuser,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.TypeBean" >
+    update QMCB.T_TYPE
+    <set >
+      <if test="typeName != null" >
+        TYPE_NAME = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="discription != null" >
+        DISCRIPTION = #{discription,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtm != null" >
+        CREATEDTM = #{createdtm,jdbcType=DATE},
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER = #{createuser,jdbcType=DECIMAL},
+      </if>
+      <if test="updatedtm != null" >
+        UPDATEDTM = #{updatedtm,jdbcType=DATE},
+      </if>
+      <if test="updateuser != null" >
+        UPDATEUSER = #{updateuser,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TYPE_ID = #{typeId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.TypeBean" >
+    update QMCB.T_TYPE
+    set TYPE_NAME = #{typeName,jdbcType=VARCHAR},
+      DISCRIPTION = #{discription,jdbcType=VARCHAR},
+      CREATEDTM = #{createdtm,jdbcType=DATE},
+      CREATEUSER = #{createuser,jdbcType=DECIMAL},
+      UPDATEDTM = #{updatedtm,jdbcType=DATE},
+      UPDATEUSER = #{updateuser,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=VARCHAR}
+    where TYPE_ID = #{typeId,jdbcType=DECIMAL}
+  </update>
+</mapper>

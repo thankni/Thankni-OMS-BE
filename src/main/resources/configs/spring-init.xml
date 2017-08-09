@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+	<!-- 注入LOG4J -->
+	<!-- <bean id="log4jInitialization" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean"> 
+		<property name="targetClass" value="org.springframework.util.Log4jConfigurer"/> 
+		<property name="targetMethod" value="initLogging"/> <property name="arguments"> 
+		<list> <value>classpath:/configs/log4j.properties</value> </list> </property> 
+		</bean> -->
+
+	<!--引入配置属性文件 -->
+	<context:property-placeholder location="classpath:/configs/jdbc.properties" />
+
+	<!--自动扫描含有@Service将其注入为bean -->
+	<context:component-scan base-package="com.hnepsoft.framework.service,com.hnepsoft.framework.util" />
+
+	<import resource="classpath:/configs/cxf-servlet.xml" />
+</beans>

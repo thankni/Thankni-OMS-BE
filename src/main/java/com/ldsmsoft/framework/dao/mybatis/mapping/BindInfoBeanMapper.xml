@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldsmsoft.framework.dao.mybatis.dao.BindInfoBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.ldsmsoft.framework.dao.mybatis.model.BindInfoBean" >
+    <id column="BIND_ID" property="bindId" jdbcType="DECIMAL" />
+    <result column="CLIENT_ID" property="clientId" jdbcType="VARCHAR" />
+    <result column="CLIENT_USERID" property="clientUserid" jdbcType="VARCHAR" />
+    <result column="ISVALID" property="isvalid" jdbcType="DECIMAL" />
+    <result column="BIND_DATE" property="bindDate" jdbcType="DATE" />
+    <result column="UNBIND_DATE" property="unbindDate" jdbcType="DATE" />
+    <result column="GRBH" property="grbh" jdbcType="DECIMAL" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="IDCARD" property="idcard" jdbcType="VARCHAR" />
+    <result column="ICNO" property="icno" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    BIND_ID, CLIENT_ID, CLIENT_USERID, ISVALID, BIND_DATE, UNBIND_DATE, GRBH,NAME,IDCARD,ICNO
+  </sql>
+  <select id="selectByParams" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from QMCB.SYS_BINDINFO
+    where 1=1
+    <if test="clientId != null" >
+      and CLIENT_ID = #{clientId,jdbcType=VARCHAR}
+    </if>
+    <if test="clientUserid != null" >
+      and CLIENT_USERID = #{clientUserid,jdbcType=VARCHAR}
+    </if>
+    <if test="isvalid != null" >
+      and ISVALID = #{isvalid,jdbcType=DECIMAL}
+    </if>
+    <if test="bindDate != null" >
+      and BIND_DATE = #{bindDate,jdbcType=DATE}
+    </if>
+    <if test="unbindDate != null" >
+      and UNBIND_DATE = #{unbindDate,jdbcType=DATE}
+    </if>
+    <if test="grbh != null" >
+      and GRBH = #{grbh,jdbcType=DECIMAL}
+    </if>    
+  </select>  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from QMCB.SYS_BINDINFO
+    where BIND_ID = #{bindId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from QMCB.SYS_BINDINFO
+    where BIND_ID = #{bindId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.BindInfoBean" >
+    insert into QMCB.SYS_BINDINFO (BIND_ID, CLIENT_ID, CLIENT_USERID, 
+      ISVALID, BIND_DATE, UNBIND_DATE,GRBH, NAME, IDCARD, ICNO)
+    values (#{bindId,jdbcType=DECIMAL}, #{clientId,jdbcType=VARCHAR}, #{clientUserid,jdbcType=VARCHAR}, 
+      #{isvalid,jdbcType=DECIMAL}, #{bindDate,jdbcType=DATE}, #{unbindDate,jdbcType=DATE}, 
+      #{grbh,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
+      #{icno,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.BindInfoBean" >
+    insert into QMCB.SYS_BINDINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bindId != null" >
+        BIND_ID,
+      </if>
+      <if test="clientId != null" >
+        CLIENT_ID,
+      </if>
+      <if test="clientUserid != null" >
+        CLIENT_USERID,
+      </if>
+      <if test="isvalid != null" >
+        ISVALID,
+      </if>
+      <if test="bindDate != null" >
+        BIND_DATE,
+      </if>
+      <if test="unbindDate != null" >
+        UNBIND_DATE,
+      </if>
+      <if test="grbh != null" >
+        GRBH,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="idcard != null" >
+        IDCARD,
+      </if>
+      <if test="icno != null" >
+        ICNO
+      </if>      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bindId != null" >
+        #{bindId,jdbcType=DECIMAL},
+      </if>
+      <if test="clientId != null" >
+        #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="clientUserid != null" >
+        #{clientUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="isvalid != null" >
+        #{isvalid,jdbcType=DECIMAL},
+      </if>
+      <if test="bindDate != null" >
+        #{bindDate,jdbcType=DATE},
+      </if>
+      <if test="unbindDate != null" >
+        #{unbindDate,jdbcType=DATE},
+      </if>
+      <if test="grbh != null" >
+        #{grbh,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="icno != null" >
+        #{icno,jdbcType=VARCHAR}
+      </if>      
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.BindInfoBean" >
+    update QMCB.SYS_BINDINFO
+    <set >
+      <if test="clientId != null" >
+        CLIENT_ID = #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="clientUserid != null" >
+        CLIENT_USERID = #{clientUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="isvalid != null" >
+        ISVALID = #{isvalid,jdbcType=DECIMAL},
+      </if>
+      <if test="bindDate != null" >
+        BIND_DATE = #{bindDate,jdbcType=DATE},
+      </if>
+      <if test="unbindDate != null" >
+        UNBIND_DATE = #{unbindDate,jdbcType=DATE},
+      </if>
+      <if test="grbh != null" >
+        GRBH = #{grbh,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        IDCARD = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="icno != null" >
+        ICNO = #{icno,jdbcType=VARCHAR}
+      </if>      
+    </set>
+    where BIND_ID = #{bindId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.BindInfoBean" >
+    update QMCB.SYS_BINDINFO
+    set CLIENT_ID = #{clientId,jdbcType=VARCHAR},
+      CLIENT_USERID = #{clientUserid,jdbcType=VARCHAR},
+      ISVALID = #{isvalid,jdbcType=DECIMAL},
+      BIND_DATE = #{bindDate,jdbcType=DATE},
+      UNBIND_DATE = #{unbindDate,jdbcType=DATE},
+      GRBH = #{grbh,jdbcType=DECIMAL},
+      NAME = #{name,jdbcType=VARCHAR},
+      IDCARD = #{idcard,jdbcType=VARCHAR},
+      ICNO = #{icno,jdbcType=VARCHAR}
+    where BIND_ID = #{bindId,jdbcType=DECIMAL}
+  </update>
+</mapper>

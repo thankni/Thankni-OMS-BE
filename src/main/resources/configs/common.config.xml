@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="gbk" ?>
+<!DOCTYPE config[
+  <!ELEMENT service-config (json_head,businesses,exceptions) >
+  <!ELEMENT businesses (business+) >
+  <!ELEMENT exceptions (exception+) >
+  <!ELEMENT business (#PCDATA) >
+  <!ELEMENT jsonConfig (head) >
+  <!ATTLIST service-config  version CDATA #REQUIRED>
+  <!ATTLIST business name CDATA #REQUIRED >
+  <!ATTLIST exception name  CDATA #REQUIRED  >
+]>
+<service-config version="1.0">
+	<json_head>data</json_head>
+	<businesses>
+			<!-- 河南全民参保接口信息  -->
+			<business name="QueryPersonalInfo">com.common.business.mybusiness.services.QueryPersonalInfoService</business>
+			<business name="QueryPersonalInsuredInfo">com.common.business.mybusiness.services.QueryPersonalInsuredInfoService</business>
+			<business name="QueryUnitInfo">com.common.business.mybusiness.services.QueryUnitInfoService</business>				
+			<business name="UpdatePersonalInfo">com.common.business.mybusiness.services.UpdatePersonalInfoService</business>				
+			<business name="UpdatePersonalInsuredInfo">com.common.business.mybusiness.services.UpdatePersonalInsuredInfoService</business>				
+			<business name="UpdateUnitInfo">com.common.business.mybusiness.services.UpdateUnitInfoService</business>				
+			<business name="AddPersonalInfo">com.common.business.mybusiness.services.AddPersonalInfoService</business>				
+			<business name="AddPersonalInsuredInfo">com.common.business.mybusiness.services.AddPersonalInsuredInfoService</business>				
+			<business name="AddUnitInfo">com.common.business.mybusiness.services.AddUnitInfoService</business>				
+			<business name="RemovePersonalInfo">com.common.business.mybusiness.services.RemovePersonalInfoService</business>				
+			<business name="RemovePersonalInsuredInfo">com.common.business.mybusiness.services.RemovePersonalInsuredInfoService</business>				
+			<business name="RemoveUnitInfo">com.common.business.mybusiness.services.RemoveUnitInfoService</business>				
+	</businesses>
+	<exceptions>
+	    <!-- 系统类异常  -->
+		    <!-- 服务发生异常 -->
+		    <exception name="400">400:服务发生异常,请联系服务提供商！</exception>
+		    <!-- 找不到对应的接口实现类相关xml配置信息 -->
+		    <exception name="401">401:服务发生异常,请联系服务提供商！</exception>
+		    <!-- 找不到对应的接口服务异常配置信息 -->
+		    <exception name="402">402:服务发生异常,请联系服务提供商！</exception> 
+	    <!-- 业务类异常 -->
+		    <!-- 请求的接口不存在 -->
+			<exception name="301">301:请求的接口不存在</exception>
+			<!-- XML报文内容为空 -->
+		    <exception name="302">302:XML报文内容为空</exception>
+		    <!-- 解析XML文件错误,XML文件非法〖不符合XML格式规范〗！ -->
+		    <exception name="303">303:解析XML文件错误,XML文件非法〖不符合XML格式规范〗！请按照XML格式要求拼装文件,注意'&lt;','&gt;','&amp;'等字符</exception>
+		    <!-- 机构编号为空-->
+		    <exception name="305">305:服务名不能为空！</exception>
+		    <!-- 机构编号不正确-->
+		    <exception name="306">306:机构编号不正确！请联系管理员添加机构编号</exception>
+		    <!-- 业务中不能为空的字段传入了空值 -->
+		    <exception name="307">307:业务中不能为空的字段传入了空值</exception> 
+		    <!-- 业务中不能为空的字段传入了空值 -->
+		    <exception name="308">308:业务处理时发生异常:</exception> 
+		    <!-- 业务中要求为日期格式的字段传入了非日期格式的字段 -->
+		    <exception name="309">309:业务中要求为日期格式的字段传入了非日期格式的内容,格式要求如:"2014-10-10",请确认</exception> 
+		    <!-- 业务中要求为数字格式的字段传入了非数字格式的字段-->
+		    <exception name="310">310:业务中要求为数字格式的字段传入了非数字格式的内容,请确认</exception> 
+		    <!-- 业务中要求为EMAIL格式的的字段传入了非EMAIL格式的字段 -->
+		    <exception name="311">311:业务中要求为EMAIL格式的的字段传入了非EMAIL格式的内容,格式要求如:"admin@newjobs",请确认</exception> 
+		    <!-- 业务的字段长超出规定的最大长度 -->
+		    <exception name="312">312:业务中的字段长超出规定的最大长度</exception> 
+		    <!-- 业务中的字段长小于规定的最小长度 -->
+		    <exception name="313">313:业务中的字段长小于规定的最小长度</exception> 
+		    <!-- 找不到对应的代码转换，请确认代码值 -->
+		    <exception name="314">314:找不到对应的代码转换，请确认代码值</exception> 
+		    <!-- 业务要求的上传的记录已经存在 -->
+		    <exception name="315">315:业务要求的上传的记录已经存在</exception> 
+		    <!-- 业务要求的更新或者删除的记录不存在 -->
+		    <exception name="316">316:业务要求的更新或者删除的记录不存在</exception> 
+		    <!-- 没有查询到记录 -->
+		    <exception name="317">317:没有查询到记录</exception> 
+		    <!-- 超出一次性最大上传数量限制 -->
+		    <exception name="318">318:超出一次性最大上传数量限制</exception> 
+		    <!-- 小于一次性要求的最小数量要求,有可能是请求的接口错误 -->
+		    <exception name="319">319:小于一次性要求的最小数量要求或请求了错误的接口</exception> 
+		    <!-- 客户端验证失败 -->
+		    <exception name="320">320:客户端验证失败,客户端id或授权码错误！ </exception> 
+		    <!-- 交易请求流水号验证 -->
+		    <exception name="321">321:交易请求流水号不能为空！</exception> 
+	        <!-- 成功 -->
+	        <exception name="200">成功</exception> 
+	</exceptions>
+</service-config>
