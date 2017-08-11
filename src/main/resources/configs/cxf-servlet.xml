@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+		http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+		
+		<import resource="classpath:META-INF/cxf/cxf.xml" />  
+        <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />  
+        
+        <bean id="loggingInInterceptor" class="org.apache.cxf.interceptor.LoggingInInterceptor"/>  
+        <bean id="loggingOutInterceptor" class="org.apache.cxf.interceptor.LoggingOutInterceptor"/>  
+        
+        <!-- soap webservice --> 
+        <!-- xfire风格 -->
+       <!--  <jaxws:server id="exmpleXfireServer" serviceClass="com.hnepsoft.framework.webservice.server.WsExample" address="/xfire">
+        	<jaxws:serviceBean>
+            	<bean class="com.hnepsoft.framework.webservice.server.WsExampleImpl" />
+        	</jaxws:serviceBean>
+    	</jaxws:server> -->
+        <!-- cxf风格 ,通过注解获取--> 
+<!--     	<jaxws:endpoint id="soap" 
+    	implementor="com.hnepsoft.framework.webservice.server.WsExampleImpl" 
+    	address="/soap">
+    	    输入拦截器
+    	    <jaxws:inInterceptors> 
+    	        输入日志拦截器
+                <ref bean="loggingInInterceptor"/>                  
+            </jaxws:inInterceptors>  
+             输出拦截器
+            <jaxws:outInterceptors>  
+                输出日志拦截器
+                <ref bean="loggingOutInterceptor"/>  
+            </jaxws:outInterceptors>
+            
+    	</jaxws:endpoint>  
+    	 -->
+		<!-- restful webservice --> 
+		<bean id="restSample" class="com.hnepsoft.framework.webservice.server.RestSampleImpl"/> 
+		<bean id="fastJsonProvider" class="com.colobu.fastjson.FastJsonProvider"/>
+		<bean id="jackJsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+		<jaxrs:server id="exampleRestServer">
+		    <!-- serviceBeans-暴露的WebService服务类 -->
+		   <jaxrs:serviceBeans>  
+            	<ref bean="restSample" />  
+        	</jaxrs:serviceBeans>
+        	<!-- 支持的协议 -->
+        	<jaxrs:extensionMappings>
+        		<entry key="json" value="application/json" />
+        		<entry key="xml" value="application/xml" />
+    		</jaxrs:extensionMappings>
+    		
+    		<jaxrs:languageMappings>
+	           <entry key="en" value="en-gb"/>  
+	        </jaxrs:languageMappings>
+    				
+        	<jaxrs:providers>  
+           		<ref bean="jackJsonProvider"/>
+        	</jaxrs:providers>  
+        	
+		</jaxrs:server>
+    
+</beans>
+

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldsmsoft.framework.dao.mybatis.dao.SMSLogBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.ldsmsoft.framework.dao.mybatis.model.SMSLogBean" >
+    <result column="SMSLOGID" property="smslogid" jdbcType="DECIMAL" />
+    <result column="PHONENUM" property="phonenum" jdbcType="VARCHAR" />
+    <result column="LOG" property="log" jdbcType="VARCHAR" />
+    <result column="DATETIME" property="datetime" jdbcType="DATE" />
+    <result column="IDENCODE" property="idencode" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="validateSMS" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SMSLogBean" resultType="String">
+  	select a.idencode 
+  	from NETREP_GR.SMSLOG a 
+  	where a.phonenum = #{phonenum,jdbcType=VARCHAR}
+  		and a.idencode = #{idencode,jdbcType=VARCHAR}
+  		and a.datetime &gt;=#{datetime,jdbcType=DATE}
+  </select>
+  <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SMSLogBean" >
+    insert into NETREP_GR.SMSLOG (SMSLOGID, PHONENUM, LOG, 
+      DATETIME, IDENCODE)
+    values (#{smslogid,jdbcType=DECIMAL}, #{phonenum,jdbcType=VARCHAR}, #{log,jdbcType=VARCHAR}, 
+      #{datetime,jdbcType=DATE}, #{idencode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SMSLogBean" >
+    insert into NETREP_GR.SMSLOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="smslogid != null" >
+        SMSLOGID,
+      </if>
+      <if test="phonenum != null" >
+        PHONENUM,
+      </if>
+      <if test="log != null" >
+        LOG,
+      </if>
+      <if test="datetime != null" >
+        DATETIME,
+      </if>
+      <if test="idencode != null" >
+        IDENCODE
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="smslogid != null" >
+        #{smslogid,jdbcType=DECIMAL},
+      </if>
+      <if test="phonenum != null" >
+        #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="log != null" >
+        #{log,jdbcType=VARCHAR},
+      </if>
+      <if test="datetime != null" >
+        #{datetime,jdbcType=DATE},
+      </if>
+      <if test="idencode != null" >
+        #{idencode,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+</mapper>

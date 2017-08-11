@@ -1,0 +1,331 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.test.ssm</groupId>
+	<artifactId>Thankni-OMS-BE</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>hello Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<junit.version>4.12</junit.version>
+		<log4j.version>1.2.17</log4j.version>
+		<spring.version>4.2.5.RELEASE</spring.version>
+		<mybatis.version>3.4.0</mybatis.version>
+		<mybatis-spring.version>1.3.0</mybatis-spring.version>
+		<proxool.version>0.9.1</proxool.version>
+		<c3p0.version>0.9.5.2</c3p0.version>
+		<mchange.version>0.2.11</mchange.version><!-- c3p0依赖包 -->
+		<dbcp2.version>2.1.1</dbcp2.version>
+		<druid.version>1.0.19</druid.version>
+		<cxf.version>3.0.9</cxf.version>
+		<jackson-core.version>2.5.4</jackson-core.version>
+		<fastjson.version>1.2.12</fastjson.version>
+		<fastjson-jaxrs-json-provider.version>0.1.0</fastjson-jaxrs-json-provider.version>
+		<spring-security.version>4.1.0.RELEASE</spring-security.version>
+		<spring-security-oauth2.version>2.0.9.RELEASE</spring-security-oauth2.version>
+	</properties>
+
+	<dependencies>
+		<!-- spring begin -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- 由于CXFServlet需要Spring Web的支持 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- SpringMVC需要的jar -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${spring.version}</version>
+		</dependency>			
+<!-- 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-logging</artifactId>
+			<version>${spring.version}</version>
+		</dependency>	 -->	
+		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-web</artifactId> 
+			<version>${spring-security.version}</version> </dependency> <dependency> 
+			<groupId>org.springframework.security.oauth</groupId> <artifactId>spring-security-oauth2</artifactId> 
+			<version>${spring-security-oauth2.version}</version> </dependency> -->
+		<!-- spring end -->
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- http://mvnrepository.com/artifact/log4j/log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
+		<!-- JDBC驱动 -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc7</artifactId>
+			<version>12.1.0.1</version>
+		</dependency>
+
+		<!-- 连接池 -->
+		<!-- http://mvnrepository.com/artifact/c3p0/c3p0 -->
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>${c3p0.version}</version>
+		</dependency>
+		<!-- c3p0依赖包 -->
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>mchange-commons-java</artifactId>
+			<version>${mchange.version}</version>
+		</dependency>
+
+		<!-- http://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>${dbcp2.version}</version>
+		</dependency>
+		<!-- http://mvnrepository.com/artifact/proxool/proxool -->
+		<dependency>
+			<groupId>proxool</groupId>
+			<artifactId>proxool</artifactId>
+			<version>${proxool.version}</version>
+		</dependency>
+		<!-- http://mvnrepository.com/artifact/com.cloudhopper.proxool/proxool-cglib -->
+		<dependency>
+			<groupId>com.cloudhopper.proxool</groupId>
+			<artifactId>proxool-cglib</artifactId>
+			<version>${proxool.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+		<!-- ORM框架 -->
+		<!-- mybatis -->
+		<!-- http://mvnrepository.com/artifact/org.mybatis/mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+		<!-- http://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>${mybatis-spring.version}</version>
+		</dependency>
+		<!-- JSON************************************************** -->
+		<!-- fastjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
+		<!-- http://mvnrepository.com/artifact/com.colobu/fastjson-jaxrs-json-provider -->
+		<!-- FastJson作为JAX-RS的序列化/反序列化框架 -->
+		<!-- https://github.com/smallnest/fastjson-jaxrs-json-provider -->
+		<dependency>
+			<groupId>com.colobu</groupId>
+			<artifactId>fastjson-jaxrs-json-provider</artifactId>
+			<version>${fastjson-jaxrs-json-provider.version}</version>
+		</dependency>
+		<!-- jackjson -->
+		<!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson-core.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson-core.version}</version>
+		</dependency>
+
+		<!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-json-provider</artifactId>
+			<version>${jackson-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-base</artifactId>
+			<version>${jackson-core.version}</version>
+		</dependency>
+
+		<!-- WebService************************************************** -->
+		<!-- http://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
+		<!--JAX-RS 1.1 (JSR-311) -->
+		<!-- <dependency> <groupId>javax.ws.rs</groupId> <artifactId>jsr311-api</artifactId> 
+			<version>1.1.1</version> </dependency> -->
+		<!-- JAX-RS 2.0 (JSR-339) -->
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<!-- CXF -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.cxf</groupId>
+		    <artifactId>cxf-rt-rs-client</artifactId>
+		    <version>${cxf.version}</version>
+		</dependency>
+		
+		<!-- http://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-ws-security -->
+<!-- 		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-ws-security</artifactId>
+			<version>${cxf.version}</version>
+		</dependency> -->
+		<!-- End CXF -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+<!-- 		
+		https://mvnrepository.com/artifact/org.apache.bval/bval-jsr303
+		<dependency>
+		    <groupId>org.apache.bval</groupId>
+		    <artifactId>bval-jsr303</artifactId>
+		    <version>0.5</version>
+		</dependency>
+	 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.axis/axis -->
+		<dependency>
+		    <groupId>org.apache.axis</groupId>
+		    <artifactId>axis</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-discovery/commons-discovery -->
+		<dependency>
+		    <groupId>commons-discovery</groupId>
+		    <artifactId>commons-discovery</artifactId>
+		    <version>0.4</version>
+		</dependency>		
+	</dependencies>
+	<build>
+		<finalName>Thankni-OMS-BE</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.7</source> <!-- 源代码使用的开发版本 -->
+					<target>1.7</target> <!-- 需要生成的目标class文件的编译版本 -->
+					<!-- 一般而言，target与source是保持一致的，但是，有时候为了让程序能在其他版本的jdk中运行(对于低版本目标jdk，源代码中需要没有使用低版本jdk中不支持的语法)，会存在target不同于source的情况 -->
+					<!-- 这下面的是可选项 -->
+					<meminitial>128m</meminitial>
+					<maxmem>512m</maxmem>
+					<fork>true</fork> <!-- fork is enable,用于明确表示编译版本配置的可用 -->
+					<compilerVersion>1.3</compilerVersion>
+					<!-- 这个选项用来传递编译器自身不包含但是却支持的参数选项 -->
+					<compilerArgument>-verbose -bootclasspath ${java.home}\lib\rt.jar</compilerArgument>
+				</configuration>
+				<!-- <artifactId>maven-compiler-plugin</artifactId> <executions> <execution> 
+					<id>default-compile</id> <phase>compile</phase> <goals> <goal>compile</goal> 
+					</goals> <configuration> <encoding>UTF-8</encoding> </configuration> </execution> 
+					</executions> -->
+			</plugin>
+			<!-- generate java doc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<javadocDirectory>target/javadoc</javadocDirectory>
+					<reportOutputDirectory>target/javadoc</reportOutputDirectory>
+					<charset>UTF-8</charset>
+					<encoding>UTF-8</encoding>
+					<docencoding>UTF-8</docencoding>
+					<show>private</show>
+				</configuration>
+			</plugin>
+			<!-- 部署至本机 -->
+			<!-- <plugin> <groupId>org.codehaus.cargo</groupId> <artifactId>cargo-maven2-plugin</artifactId> 
+				<version>1.0</version> <configuration> <container> <containerId>tomcat8x</containerId> 
+				<home>E:\JavaDev\apache-tomcat-8.0.33</home> </container> <configuration> 
+				<type>existing</type> <home>E:\JavaDev\apache-tomcat-8.0.33</home> </configuration> 
+				</configuration> </plugin> -->
+		</plugins>
+	</build>
+
+</project>
