@@ -14,18 +14,24 @@
   <sql id="Base_Column_List" >
     TYPE_ID, TYPE_NAME, DISCRIPTION, CREATEDTM, CREATEUSER, UPDATEDTM, UPDATEUSER, STATUS
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+  <select id="selectByParams" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from QMCB.T_TYPE
+    from T_TYPE T
+    WHERE T.STATUS = '1'
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_TYPE
     where TYPE_ID = #{typeId,jdbcType=DECIMAL}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
-    delete from QMCB.T_TYPE
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_TYPE
     where TYPE_ID = #{typeId,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.TypeBean" >
-    insert into QMCB.T_TYPE (TYPE_ID, TYPE_NAME, DISCRIPTION, 
+    insert into T_TYPE (TYPE_ID, TYPE_NAME, DISCRIPTION, 
       CREATEDTM, CREATEUSER, UPDATEDTM, 
       UPDATEUSER, STATUS)
     values (#{typeId,jdbcType=DECIMAL}, #{typeName,jdbcType=VARCHAR}, #{discription,jdbcType=VARCHAR}, 
@@ -33,7 +39,7 @@
       #{updateuser,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.TypeBean" >
-    insert into QMCB.T_TYPE
+    insert into T_TYPE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="typeId != null" >
         TYPE_ID,
@@ -88,7 +94,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.TypeBean" >
-    update QMCB.T_TYPE
+    update T_TYPE
     <set >
       <if test="typeName != null" >
         TYPE_NAME = #{typeName,jdbcType=VARCHAR},
@@ -115,7 +121,7 @@
     where TYPE_ID = #{typeId,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.TypeBean" >
-    update QMCB.T_TYPE
+    update T_TYPE
     set TYPE_NAME = #{typeName,jdbcType=VARCHAR},
       DISCRIPTION = #{discription,jdbcType=VARCHAR},
       CREATEDTM = #{createdtm,jdbcType=DATE},

@@ -1,19 +1,16 @@
 package com.ldsmsoft.framework.service;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ldsmsoft.framework.dao.mybatis.dao.ProductBeanMapper;
 import com.ldsmsoft.framework.dao.mybatis.model.ProductBean;
+import com.ldsmsoft.framework.dao.mybatis.model.TypeBean;
 import com.ldsmsoft.framework.util.CheckIDCard;
-import com.ldsmsoft.framework.util.DateUtil;
 import com.ldsmsoft.framework.util.Util;;
 
 @Service("ProductService")
@@ -37,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
 				if(!Util.isEmpty(icno)){
 					errorInfo="";
 				}else{
-					errorInfo="社保卡号不能为空！";
+					errorInfo="";
 				}
 			}else{
 				errorInfo = errorInfo1;
@@ -48,8 +45,11 @@ public class ProductServiceImpl implements ProductService {
 		return errorInfo;
 	}
 	
+	/**
+	 * 查询信息
+	 */
 	@Override
-	public List<ProductBean> getProductsByParams(String typeid,String page,String pageSize) {
+	public List<ProductBean> selectByParams(String typeid,String page,String pageSize) {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("typeId",typeid);
 		
@@ -68,5 +68,25 @@ public class ProductServiceImpl implements ProductService {
 		List<ProductBean> list = productMapper.selectByParams(map);
 		return list;
 	}
+	/**
+	 * 查询信息（单条）
+	 */
+	@Override
+	public ProductBean selectById(String productId) {
+		return productMapper.selectByPrimaryKey(Long.parseLong(productId));
+	}	
+	/**
+	 * 修改信息
+	 */
+	@Override
+	public HashMap<String, Object> eidt(ProductBean bean) {
+
+		HashMap<String, Object> resultMap = new HashMap<String,Object>();
+		
+		productMapper.updateByPrimaryKeySelective(bean);
+		
+		return resultMap;
+	}
+
 	
 }

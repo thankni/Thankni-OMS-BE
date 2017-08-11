@@ -22,30 +22,29 @@
     PRODUCT_ID, PRODUCT_NAME, DISCRIPTION, LABEL, FIELD, RATE, PARENTID, TYPE_ID, CREATEDTM, 
     CREATEUSER, UPDATEDTM, UPDATEUSER, STATUS, PRICE, UNIT
   </sql>
-  <select id="selectByParams" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+  <select id="selectByParams" resultMap="BaseResultMap" parameterType="java.util.Map" >
     SELECT *
 	  FROM (
 	    SELECT ROWNUM AS ROWNO,
 	    <include refid="Base_Column_List" />
-	    FROM QMCB.T_PRODUCT
+	    FROM T_PRODUCT
 	    WHERE TYPE_ID = #{typeId,jdbcType=DECIMAL}
 	    AND ROWNUM &lt;= #{page}*#{pageSize}) TABLE_ALIAS
     WHERE TABLE_ALIAS.ROWNO &gt;= (#{page}-1)*#{pageSize}+1  
   </select>
   
-  
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from QMCB.T_PRODUCT
+    from T_PRODUCT
     where PRODUCT_ID = #{productId,jdbcType=DECIMAL}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
-    delete from QMCB.T_PRODUCT
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_PRODUCT
     where PRODUCT_ID = #{productId,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ProductBean" >
-    insert into QMCB.T_PRODUCT (PRODUCT_ID, PRODUCT_NAME, DISCRIPTION, 
+    insert into T_PRODUCT (PRODUCT_ID, PRODUCT_NAME, DISCRIPTION, 
       LABEL, FIELD, RATE, 
       PARENTID, TYPE_ID, CREATEDTM, 
       CREATEUSER, UPDATEDTM, UPDATEUSER, 
@@ -59,7 +58,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ProductBean" >
-    insert into QMCB.T_PRODUCT
+    insert into T_PRODUCT
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="productId != null" >
         PRODUCT_ID,
@@ -156,7 +155,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ProductBean" >
-    update QMCB.T_PRODUCT
+    update T_PRODUCT
     <set >
       <if test="productName != null" >
         PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
@@ -204,7 +203,7 @@
     where PRODUCT_ID = #{productId,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ProductBean" >
-    update QMCB.T_PRODUCT
+    update T_PRODUCT
     set PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
       DISCRIPTION = #{discription,jdbcType=VARCHAR},
       LABEL = #{label,jdbcType=VARCHAR},

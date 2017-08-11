@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ldsmsoft.framework.dao.mybatis.dao.AuthClientBeanMapper;
 import com.ldsmsoft.framework.dao.mybatis.model.AuthClientBean;
+import com.ldsmsoft.framework.util.GlobalStatic.Common_Status;
 import com.ldsmsoft.framework.util.MD5Util;
 
 @Service("AuthClientService")
@@ -23,41 +24,41 @@ public class AuthClientServiceImpl implements AuthClientService{
 	public HashMap<String, Object> validateAuth(String clientId,String clientSecret) {
 		HashMap<String, Object> params = new HashMap<String,Object>();
 		HashMap<String, Object> resultMap = new HashMap<String,Object>();
-		if(clientId!=null && clientId!=""){
-			if(clientSecret!=null && clientSecret!=""){
+		//客户端id校验
+		if(clientId==null || "".equals(clientId)){
+			resultMap.put("msg", "clientId不能为空！");
+			resultMap.put("status",Common_Status.Common_Status_ISNULL);
+			return resultMap;
+		}
+		//授权码校验
+		if(clientSecret==null || "".equals(clientSecret)){
+			resultMap.put("msg", "clientSecret不能为空！");
+			resultMap.put("status",Common_Status.Common_Status_ISNULL);
+			return resultMap;
+		}
 				
-				try {
-					//参数加密处理
-					String clientSecretEncode = MD5Util.md5Encode(clientSecret);
-					
-					params.put("clientId", clientId);
-					params.put("clientSecret", clientSecretEncode);
-					
-					//查询授权信息是否存在及其有效性
-					List<AuthClientBean> authClientList = authClientMapper.validateAuth(params);
-					if(authClientList.isEmpty()){
-						resultMap.put("message", "授权信息不存在或者已经失效，请联系管理员！");
-						resultMap.put("resultType", "error");
-					}else if(authClientList.size()>1){
-						resultMap.put("message", "授权信息存在重复记录，请联系管理员！");
-						resultMap.put("resultType", "error");
-					}else{
-						AuthClientBean authClientBean = authClientList.get(0);
-						resultMap.put("resultData", authClientBean);
-						resultMap.put("message", "授权信息正常！");
-						resultMap.put("resultType", "success");
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
+		try {
+			//参数加密处理
+			String clientSecretEncode = MD5Util.md5Encode(clientSecret);
+			
+			params.put("clientId", clientId);
+			params.put("clientSecret", clientSecretEncode);
+			
+			//查询授权信息是否存在及其有效性
+			List<AuthClientBean> authClientList = authClientMapper.validateAuth(params);
+			if(authClientList.size()==0){
+				resultMap.put("msg", "授权信息不存在或者已经失效，请联系管理员！");
+				resultMap.put("status", Common_Status.Common_Status_501);
 			}else{
-				resultMap.put("message", "clientSecret不能为空！");
-				resultMap.put("resultType", "error");
+				AuthClientBean authClientBean = authClientList.get(0);
+				resultMap.put("result", authClientBean);
+				resultMap.put("msg", "授权信息正常！");
+				resultMap.put("status",Common_Status.Common_Status_200);
 			}
-		}else{
-			resultMap.put("message", "clientId不能为空！");
-			resultMap.put("resultType", "error");
+		} catch (Exception e) {
+			resultMap.put("msg",e.getMessage());
+			resultMap.put("status",Common_Status.Common_Status_400);
+			e.printStackTrace();
 		}
 		return resultMap;
 	}

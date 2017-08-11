@@ -14,7 +14,7 @@
   <select id="validateAuth" resultMap="BaseResultMap" parameterType="java.util.Map" >
     select 
     <include refid="Base_Column_List" />
-    from QMCB.SYS_AUTHCLIENT
+    from SYS_AUTHCLIENT
     where CLIENT_ID = #{clientId,jdbcType=VARCHAR}
     and CLIENT_SECRET = #{clientSecret,jdbcType=VARCHAR}
     and INVALIDTIME &gt;=sysdate
@@ -22,21 +22,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from QMCB.SYS_AUTHCLIENT
+    from SYS_AUTHCLIENT
     where AUTH_ID = #{authId,jdbcType=DECIMAL}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from QMCB.SYS_AUTHCLIENT
+    delete from SYS_AUTHCLIENT
     where AUTH_ID = #{authId,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.AuthClientBean" >
-    insert into QMCB.SYS_AUTHCLIENT (AUTH_ID, CLIENT_ID, CLENT_NAME, 
+    insert into SYS_AUTHCLIENT (AUTH_ID, CLIENT_ID, CLENT_NAME, 
       CLIENT_SECRET)
     values (#{authId,jdbcType=DECIMAL}, #{clientId,jdbcType=VARCHAR}, #{clentName,jdbcType=VARCHAR}, 
       #{clientSecret,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.AuthClientBean" >
-    insert into QMCB.SYS_AUTHCLIENT
+    insert into SYS_AUTHCLIENT
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="authId != null" >
         AUTH_ID,
@@ -67,7 +67,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.AuthClientBean" >
-    update QMCB.SYS_AUTHCLIENT
+    update SYS_AUTHCLIENT
     <set >
       <if test="clientId != null" >
         CLIENT_ID = #{clientId,jdbcType=VARCHAR},
@@ -82,7 +82,7 @@
     where AUTH_ID = #{authId,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.AuthClientBean" >
-    update QMCB.SYS_AUTHCLIENT
+    update SYS_AUTHCLIENT
     set CLIENT_ID = #{clientId,jdbcType=VARCHAR},
       CLENT_NAME = #{clentName,jdbcType=VARCHAR},
       CLIENT_SECRET = #{clientSecret,jdbcType=VARCHAR}

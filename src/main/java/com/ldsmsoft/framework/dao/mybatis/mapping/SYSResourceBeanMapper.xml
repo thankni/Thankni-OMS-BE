@@ -19,18 +19,31 @@
     RESOURCE_ID, RESOURCE_NAME, DISCRIPTION, URL, TYPE, PRAENTID, CREATEUSER, CREATEDTM, 
     UPDATEUSER, UPDATEDTM, STATUS, HASHCODE
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from QMCB.SYS_RESOURCE
+    from SYS_RESOURCE T1,SYS_USER_ROLE T2,SYS_ROLE_RESOURCE T3
+    where T1.RESOURCE_ID = T3.RESOURCE_ID 
+    AND T3.ROLE_ID=T2.ROLE_ID 
+    AND T2.USERID=#{userId,jdbcType=DECIMAL}
+  </select>
+  <select id="selectByParams" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_RESOURCE
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_RESOURCE
     where RESOURCE_ID = #{resourceId,jdbcType=DECIMAL}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
-    delete from QMCB.SYS_RESOURCE
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_RESOURCE
     where RESOURCE_ID = #{resourceId,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSResourceBean" >
-    insert into QMCB.SYS_RESOURCE (RESOURCE_ID, RESOURCE_NAME, DISCRIPTION, 
+    insert into SYS_RESOURCE (RESOURCE_ID, RESOURCE_NAME, DISCRIPTION, 
       URL, TYPE, PRAENTID, 
       CREATEUSER, CREATEDTM, UPDATEUSER, 
       UPDATEDTM, STATUS, HASHCODE
@@ -42,7 +55,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSResourceBean" >
-    insert into QMCB.SYS_RESOURCE
+    insert into SYS_RESOURCE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="resourceId != null" >
         RESOURCE_ID,
@@ -121,7 +134,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSResourceBean" >
-    update QMCB.SYS_RESOURCE
+    update SYS_RESOURCE
     <set >
       <if test="resourceName != null" >
         RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR},
@@ -160,7 +173,7 @@
     where RESOURCE_ID = #{resourceId,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSResourceBean" >
-    update QMCB.SYS_RESOURCE
+    update SYS_RESOURCE
     set RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR},
       DISCRIPTION = #{discription,jdbcType=VARCHAR},
       URL = #{url,jdbcType=VARCHAR},

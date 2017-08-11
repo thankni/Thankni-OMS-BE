@@ -16,18 +16,24 @@
     ROLE_ID, ROLE_NAME, DISCRIPTION, CREATEUSER, CREATEDTM, UPDATEUSER, UPDATEDTM, STATUS, 
     HASHCODE
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+  <select id="selectByParams" resultMap="BaseResultMap" parameterType="java.util.Map" >
     select 
     <include refid="Base_Column_List" />
-    from QMCB.SYS_ROLE
+    from SYS_ROLE
+    WHERE CREATEUSER = #{userId,jdbcType=DECIMAL}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ROLE
     where ROLE_ID = #{roleId,jdbcType=DECIMAL}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
-    delete from QMCB.SYS_ROLE
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_ROLE
     where ROLE_ID = #{roleId,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSRoleBean" >
-    insert into QMCB.SYS_ROLE (ROLE_ID, ROLE_NAME, DISCRIPTION, 
+    insert into SYS_ROLE (ROLE_ID, ROLE_NAME, DISCRIPTION, 
       CREATEUSER, CREATEDTM, UPDATEUSER, 
       UPDATEDTM, STATUS, HASHCODE
       )
@@ -37,7 +43,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSRoleBean" >
-    insert into QMCB.SYS_ROLE
+    insert into SYS_ROLE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="roleId != null" >
         ROLE_ID,
@@ -98,7 +104,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSRoleBean" >
-    update QMCB.SYS_ROLE
+    update SYS_ROLE
     <set >
       <if test="roleName != null" >
         ROLE_NAME = #{roleName,jdbcType=VARCHAR},
@@ -128,7 +134,7 @@
     where ROLE_ID = #{roleId,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSRoleBean" >
-    update QMCB.SYS_ROLE
+    update SYS_ROLE
     set ROLE_NAME = #{roleName,jdbcType=VARCHAR},
       DISCRIPTION = #{discription,jdbcType=VARCHAR},
       CREATEUSER = #{createuser,jdbcType=DECIMAL},

@@ -1,16 +1,15 @@
 package com.ldsmsoft.framework.dao.mybatis.dao;
 
 import com.ldsmsoft.framework.dao.mybatis.model.SYSLogBean;
-import java.math.BigDecimal;
 
 public interface SYSLogBeanMapper {
-    int deleteByPrimaryKey(BigDecimal logId);
+    int deleteByPrimaryKey(Long logId);
 
     int insert(SYSLogBean record);
 
     int insertSelective(SYSLogBean record);
 
-    SYSLogBean selectByPrimaryKey(BigDecimal logId);
+    SYSLogBean selectByPrimaryKey(Long logId);
 
     int updateByPrimaryKeySelective(SYSLogBean record);
 

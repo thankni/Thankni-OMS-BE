@@ -15,18 +15,18 @@
   <sql id="Base_Column_List" >
     LOG_ID, ARGS_IN, CODE, MSG, DTM, ZHSQ_NAME, RESULT_OUT, CLIENTID, USER_ID
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from QMCB.SYS_LOG
+    from SYS_LOG
     where LOG_ID = #{logId,jdbcType=DECIMAL}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
-    delete from QMCB.SYS_LOG
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_LOG
     where LOG_ID = #{logId,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSLogBean" >
-    insert into QMCB.SYS_LOG (LOG_ID, ARGS_IN, CODE, 
+    insert into SYS_LOG (LOG_ID, ARGS_IN, CODE, 
       MSG, DTM, ZHSQ_NAME, RESULT_OUT, 
       CLIENTID, USER_ID)
     values (#{logId,jdbcType=DECIMAL}, #{argsIn,jdbcType=OTHER}, #{code,jdbcType=VARCHAR}, 
@@ -34,7 +34,7 @@
       #{clientid,jdbcType=VARCHAR}, #{userId,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSLogBean" >
-    insert into QMCB.SYS_LOG
+    insert into SYS_LOG
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="logId != null" >
         LOG_ID,
@@ -95,7 +95,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSLogBean" >
-    update QMCB.SYS_LOG
+    update SYS_LOG
     <set >
       <if test="argsIn != null" >
         ARGS_IN = #{argsIn,jdbcType=OTHER},
@@ -125,7 +125,7 @@
     where LOG_ID = #{logId,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSLogBean" >
-    update QMCB.SYS_LOG
+    update SYS_LOG
     set ARGS_IN = #{argsIn,jdbcType=OTHER},
       CODE = #{code,jdbcType=VARCHAR},
       MSG = #{msg,jdbcType=OTHER},

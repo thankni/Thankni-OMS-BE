@@ -20,18 +20,34 @@
     USER_ID, USER_NAME, IDCARD, EMAIL, TEL, REGTIME, PASSWORD, UPDATETIME, STATUS, LOGINNAME, 
     TOKEN, TOKEN_TIME, HASHCODE
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+  <select id="selectByParams" resultMap="BaseResultMap" parameterType="java.util.Map" >
     select 
     <include refid="Base_Column_List" />
-    from QMCB.SYS_USERS
+    from SYS_USERS
+    where 1=1
+    <if test="loginName != null">
+    	LOGINNAME = #{loginName,jdbcType=VARCHAR}
+    </if>
+    <if test="password != null">
+    	PASSWORD = #{password,jdbcType=VARCHAR}
+    </if>
+    <if test="token != null">
+    	TOKEN = #{token,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USERS
     where USER_ID = #{userId,jdbcType=DECIMAL}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
-    delete from QMCB.SYS_USERS
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_USERS
     where USER_ID = #{userId,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSUserBean" >
-    insert into QMCB.SYS_USERS (USER_ID, USER_NAME, IDCARD, 
+    insert into SYS_USERS (USER_ID, USER_NAME, IDCARD, 
       EMAIL, TEL, REGTIME, PASSWORD, 
       UPDATETIME, STATUS, LOGINNAME, 
       TOKEN, TOKEN_TIME, HASHCODE
@@ -43,7 +59,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSUserBean" >
-    insert into QMCB.SYS_USERS
+    insert into SYS_USERS
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
         USER_ID,
@@ -128,7 +144,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSUserBean" >
-    update QMCB.SYS_USERS
+    update SYS_USERS
     <set >
       <if test="userName != null" >
         USER_NAME = #{userName,jdbcType=VARCHAR},
@@ -170,7 +186,7 @@
     where USER_ID = #{userId,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SYSUserBean" >
-    update QMCB.SYS_USERS
+    update SYS_USERS
     set USER_NAME = #{userName,jdbcType=VARCHAR},
       IDCARD = #{idcard,jdbcType=VARCHAR},
       EMAIL = #{email,jdbcType=VARCHAR},

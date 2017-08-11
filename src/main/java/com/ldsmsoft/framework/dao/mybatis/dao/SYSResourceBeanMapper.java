@@ -1,18 +1,24 @@
 package com.ldsmsoft.framework.dao.mybatis.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.ldsmsoft.framework.dao.mybatis.model.SYSResourceBean;
-import java.math.BigDecimal;
 
 public interface SYSResourceBeanMapper {
-    int deleteByPrimaryKey(BigDecimal resourceId);
+    int deleteByPrimaryKey(Long resourceId);
 
     int insert(SYSResourceBean record);
 
     int insertSelective(SYSResourceBean record);
 
-    SYSResourceBean selectByPrimaryKey(BigDecimal resourceId);
+    SYSResourceBean selectByPrimaryKey(Long resourceId);
 
     int updateByPrimaryKeySelective(SYSResourceBean record);
 
     int updateByPrimaryKey(SYSResourceBean record);
+
+    List<SYSResourceBean> selectByParams(HashMap<String,Object> params);
+    
+    List<SYSResourceBean> selectByUserId(Long userId);
 }
