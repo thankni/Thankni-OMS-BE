@@ -1,10 +1,10 @@
 package com.ldsmsoft.framework.dao.mybatis.model;
 
-import java.math.BigDecimal;
+import java.lang.Long;
 import java.util.Date;
 
 public class SYSResourceBean {
-    private BigDecimal resourceId;
+    private Long resourceId;
 
     private String resourceName;
 
@@ -14,13 +14,13 @@ public class SYSResourceBean {
 
     private String type;
 
-    private BigDecimal praentid;
+    private Long praentid;
 
-    private BigDecimal createuser;
+    private Long createuser;
 
     private Date createdtm;
 
-    private BigDecimal updateuser;
+    private Long updateuser;
 
     private Date updatedtm;
 
@@ -28,11 +28,11 @@ public class SYSResourceBean {
 
     private String hashcode;
 
-    public BigDecimal getResourceId() {
+    public Long getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(BigDecimal resourceId) {
+    public void setResourceId(Long resourceId) {
         this.resourceId = resourceId;
     }
 
@@ -68,19 +68,19 @@ public class SYSResourceBean {
         this.type = type == null ? null : type.trim();
     }
 
-    public BigDecimal getPraentid() {
+    public Long getPraentid() {
         return praentid;
     }
 
-    public void setPraentid(BigDecimal praentid) {
+    public void setPraentid(Long praentid) {
         this.praentid = praentid;
     }
 
-    public BigDecimal getCreateuser() {
+    public Long getCreateuser() {
         return createuser;
     }
 
-    public void setCreateuser(BigDecimal createuser) {
+    public void setCreateuser(Long createuser) {
         this.createuser = createuser;
     }
 
@@ -92,11 +92,11 @@ public class SYSResourceBean {
         this.createdtm = createdtm;
     }
 
-    public BigDecimal getUpdateuser() {
+    public Long getUpdateuser() {
         return updateuser;
     }
 
-    public void setUpdateuser(BigDecimal updateuser) {
+    public void setUpdateuser(Long updateuser) {
         this.updateuser = updateuser;
     }
 

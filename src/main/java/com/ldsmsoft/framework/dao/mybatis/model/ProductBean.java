@@ -1,10 +1,10 @@
 package com.ldsmsoft.framework.dao.mybatis.model;
 
-import java.math.BigDecimal;
+import java.lang.Long;
 import java.util.Date;
 
 public class ProductBean {
-    private BigDecimal productId;
+    private Long productId;
 
     private String productName;
 
@@ -16,29 +16,29 @@ public class ProductBean {
 
     private String rate;
 
-    private BigDecimal parentid;
+    private Long parentid;
 
-    private BigDecimal typeId;
+    private Long typeId;
 
     private Date createdtm;
 
-    private BigDecimal createuser;
+    private Long createuser;
 
     private Date updatedtm;
 
-    private BigDecimal updateuser;
+    private Long updateuser;
 
     private String status;
 
-    private BigDecimal price;
+    private Long price;
 
     private String unit;
 
-    public BigDecimal getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(BigDecimal productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
@@ -82,19 +82,19 @@ public class ProductBean {
         this.rate = rate == null ? null : rate.trim();
     }
 
-    public BigDecimal getParentid() {
+    public Long getParentid() {
         return parentid;
     }
 
-    public void setParentid(BigDecimal parentid) {
+    public void setParentid(Long parentid) {
         this.parentid = parentid;
     }
 
-    public BigDecimal getTypeId() {
+    public Long getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(BigDecimal typeId) {
+    public void setTypeId(Long typeId) {
         this.typeId = typeId;
     }
 
@@ -106,11 +106,11 @@ public class ProductBean {
         this.createdtm = createdtm;
     }
 
-    public BigDecimal getCreateuser() {
+    public Long getCreateuser() {
         return createuser;
     }
 
-    public void setCreateuser(BigDecimal createuser) {
+    public void setCreateuser(Long createuser) {
         this.createuser = createuser;
     }
 
@@ -122,11 +122,11 @@ public class ProductBean {
         this.updatedtm = updatedtm;
     }
 
-    public BigDecimal getUpdateuser() {
+    public Long getUpdateuser() {
         return updateuser;
     }
 
-    public void setUpdateuser(BigDecimal updateuser) {
+    public void setUpdateuser(Long updateuser) {
         this.updateuser = updateuser;
     }
 
@@ -138,11 +138,11 @@ public class ProductBean {
         this.status = status == null ? null : status.trim();
     }
 
-    public BigDecimal getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 

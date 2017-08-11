@@ -1,37 +1,37 @@
 package com.ldsmsoft.framework.dao.mybatis.model;
 
-import java.math.BigDecimal;
+import java.lang.Long;
 
 public class SYSRoleResourceBean {
-    private BigDecimal id;
+    private Long id;
 
-    private BigDecimal roleId;
+    private Long roleId;
 
-    private BigDecimal resourceId;
+    private Long resourceId;
 
     private String hashcode;
 
-    public BigDecimal getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public BigDecimal getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(BigDecimal roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
-    public BigDecimal getResourceId() {
+    public Long getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(BigDecimal resourceId) {
+    public void setResourceId(Long resourceId) {
         this.resourceId = resourceId;
     }
 

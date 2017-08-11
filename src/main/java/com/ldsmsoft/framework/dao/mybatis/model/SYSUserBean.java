@@ -1,10 +1,9 @@
 package com.ldsmsoft.framework.dao.mybatis.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class SYSUserBean {
-    private BigDecimal userId;
+    private Long userId;
 
     private String userName;
 
@@ -30,12 +29,12 @@ public class SYSUserBean {
 
     private String hashcode;
 
-    public BigDecimal getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(BigDecimal userId) {
-        this.userId = userId;
+    public void setUserId(Long userId2) {
+        this.userId = userId2;
     }
 
     public String getUserName() {

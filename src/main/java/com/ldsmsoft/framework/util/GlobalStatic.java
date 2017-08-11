@@ -24,10 +24,18 @@ public interface GlobalStatic {
 		
 		/** 用户名或密码错误**/
 		public static final String Common_Status_301 = "301";
-		public static final String Common_Msg_301 = "用户名或密码错误！";
 		
 		/**授权信息无效**/
 		public static final String Common_Status_501 = "501";
+		
+		/**手机号格式错误**/
+		public static final String Common_Status_601 = "601";
+		/**邮箱格式错误**/
+		public static final String Common_Status_602 = "602";
+		/**身份证号格式错误**/
+		public static final String Common_Status_603 = "603";
+		/**姓名格式错误**/
+		public static final String Common_Status_604 = "604";
 		
 	}
 }

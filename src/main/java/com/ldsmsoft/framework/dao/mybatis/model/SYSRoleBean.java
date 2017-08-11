@@ -1,20 +1,20 @@
 package com.ldsmsoft.framework.dao.mybatis.model;
 
-import java.math.BigDecimal;
+import java.lang.Long;
 import java.util.Date;
 
 public class SYSRoleBean {
-    private BigDecimal roleId;
+    private Long roleId;
 
     private String roleName;
 
     private String discription;
 
-    private BigDecimal createuser;
+    private Long createuser;
 
     private Date createdtm;
 
-    private BigDecimal updateuser;
+    private Long updateuser;
 
     private Date updatedtm;
 
@@ -22,11 +22,11 @@ public class SYSRoleBean {
 
     private String hashcode;
 
-    public BigDecimal getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(BigDecimal roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
@@ -46,11 +46,11 @@ public class SYSRoleBean {
         this.discription = discription == null ? null : discription.trim();
     }
 
-    public BigDecimal getCreateuser() {
+    public Long getCreateuser() {
         return createuser;
     }
 
-    public void setCreateuser(BigDecimal createuser) {
+    public void setCreateuser(Long createuser) {
         this.createuser = createuser;
     }
 
@@ -62,11 +62,11 @@ public class SYSRoleBean {
         this.createdtm = createdtm;
     }
 
-    public BigDecimal getUpdateuser() {
+    public Long getUpdateuser() {
         return updateuser;
     }
 
-    public void setUpdateuser(BigDecimal updateuser) {
+    public void setUpdateuser(Long updateuser) {
         this.updateuser = updateuser;
     }
 

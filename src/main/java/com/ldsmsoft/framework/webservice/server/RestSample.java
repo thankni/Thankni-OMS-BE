@@ -34,10 +34,27 @@ public interface RestSample {
     * @return
     */
    @GET  
-   @Path("/DE8001/{name}/{idcard}/{icno}/{tel}/{password}")  
+   @Path("/DE1001/{userName}/{tel}/{loginName}/{password}")  
    @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-   HashMap<String, Object> regUser(@PathParam("name")String name, @PathParam("loginName")String loginName,@PathParam("icno")String icno,@PathParam("tel")String tel, @PathParam("password")String password);
+   HashMap<String, Object> regUser(@PathParam("userName")String name, @PathParam("tel")String tel, @PathParam("loginName")String loginName,@PathParam("password")String password);
 
+   /**
+    * 修改注册信息
+    * @param userId
+    * @param userName
+    * @param idcard
+    * @param tel
+    * @param email
+    * @param password
+    * @param token
+    * @param status
+    * @return
+    */
+   @GET  
+   @Path("/DE1002/{clientId}/{clientSecret}/{userId}/{userName}/{idcard}/{tel}/{email}/{password}/{token}/{status}")  
+   @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })   
+   HashMap<String, Object> eidtRegInfo(@PathParam("clientId")String clientId, @PathParam("clientSecret")String clientSecret,String userId, String userName, String idcard, String tel, String email,
+		   String password, String token, String status);
    /**
     * 登录
     * @param clientId 授权账号
@@ -47,10 +64,22 @@ public interface RestSample {
     * @return
     */
    @GET  
-   @Path("/DE8002/{clientId}/{clientSecret}/{loginName}/{password}/{tk}")  
+   @Path("/DE1003/{clientId}/{clientSecret}/{loginName}/{password}/{tk}")  
    @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
    HashMap<String, Object> getPersonInfo(@PathParam("clientId")String clientId, @PathParam("clientSecret")String clientSecret, @PathParam("loginName")String loginName, @PathParam("password")String password, @PathParam("tk")String token);
 
-HashMap<String, Object> getPersonPower(String token, String clientId, String clientSecret, String userId);
+   /**
+    * 获取用户权限
+    * @param token
+    * @param clientId
+    * @param clientSecret
+    * @param userId
+    * @return
+    */
+   @GET  
+   @Path("/DE2001/{token}/{clientId}/{clientSecret}/{userId}")  
+   @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })   
+   HashMap<String, Object> getPersonPower(@PathParam("token")String token, @PathParam("clientId")String clientId, @PathParam("clientSecret")String clientSecret, @PathParam("userId")String userId);
+
    
 }  
