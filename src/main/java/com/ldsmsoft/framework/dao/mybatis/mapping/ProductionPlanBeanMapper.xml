@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldsmsoft.framework.dao.mybatis.dao.ProductionPlanBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.ldsmsoft.framework.dao.mybatis.model.ProductionPlanBean" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="fk_production_id" property="fkProductionId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="market_price" property="marketPrice" jdbcType="DOUBLE" />
+    <result column="sales_volume" property="salesVolume" jdbcType="INTEGER" />
+    <result column="likes" property="likes" jdbcType="INTEGER" />
+    <result column="unlikes" property="unlikes" jdbcType="INTEGER" />
+    <result column="fk_create_user_id" property="fkCreateUserId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fk_production_id, name, price, market_price, sales_volume, likes, unlikes, fk_create_user_id, 
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from production_plan
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from production_plan
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ProductionPlanBean" >
+    insert into production_plan (id, fk_production_id, name, 
+      price, market_price, sales_volume, 
+      likes, unlikes, fk_create_user_id, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{fkProductionId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DOUBLE}, #{marketPrice,jdbcType=DOUBLE}, #{salesVolume,jdbcType=INTEGER}, 
+      #{likes,jdbcType=INTEGER}, #{unlikes,jdbcType=INTEGER}, #{fkCreateUserId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ProductionPlanBean" >
+    insert into production_plan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fkProductionId != null" >
+        fk_production_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="marketPrice != null" >
+        market_price,
+      </if>
+      <if test="salesVolume != null" >
+        sales_volume,
+      </if>
+      <if test="likes != null" >
+        likes,
+      </if>
+      <if test="unlikes != null" >
+        unlikes,
+      </if>
+      <if test="fkCreateUserId != null" >
+        fk_create_user_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="fkProductionId != null" >
+        #{fkProductionId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="marketPrice != null" >
+        #{marketPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="salesVolume != null" >
+        #{salesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="likes != null" >
+        #{likes,jdbcType=INTEGER},
+      </if>
+      <if test="unlikes != null" >
+        #{unlikes,jdbcType=INTEGER},
+      </if>
+      <if test="fkCreateUserId != null" >
+        #{fkCreateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ProductionPlanBean" >
+    update production_plan
+    <set >
+      <if test="fkProductionId != null" >
+        fk_production_id = #{fkProductionId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="marketPrice != null" >
+        market_price = #{marketPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="salesVolume != null" >
+        sales_volume = #{salesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="likes != null" >
+        likes = #{likes,jdbcType=INTEGER},
+      </if>
+      <if test="unlikes != null" >
+        unlikes = #{unlikes,jdbcType=INTEGER},
+      </if>
+      <if test="fkCreateUserId != null" >
+        fk_create_user_id = #{fkCreateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ProductionPlanBean" >
+    update production_plan
+    set fk_production_id = #{fkProductionId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      market_price = #{marketPrice,jdbcType=DOUBLE},
+      sales_volume = #{salesVolume,jdbcType=INTEGER},
+      likes = #{likes,jdbcType=INTEGER},
+      unlikes = #{unlikes,jdbcType=INTEGER},
+      fk_create_user_id = #{fkCreateUserId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

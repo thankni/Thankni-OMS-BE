@@ -279,7 +279,14 @@
 		    <groupId>commons-discovery</groupId>
 		    <artifactId>commons-discovery</artifactId>
 		    <version>0.4</version>
-		</dependency>		
+		</dependency>	
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20160810</version>
+		</dependency>
+			
 	</dependencies>
 	<build>
 		<finalName>Thankni-OMS-BE</finalName>
