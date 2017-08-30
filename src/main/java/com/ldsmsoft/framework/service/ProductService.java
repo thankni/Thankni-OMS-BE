@@ -1,5 +1,5 @@
 /**
- * 
+ * 商品的业务类
  */
 package com.ldsmsoft.framework.service;
 
@@ -7,7 +7,8 @@ package com.ldsmsoft.framework.service;
 import java.util.HashMap;
 import java.util.List;
 
-import com.ldsmsoft.framework.dao.mybatis.model.ProductBean;
+import com.ldsmsoft.framework.dao.mybatis.model.ProductionBeanWithBLOBs;
+import com.ldsmsoft.framework.dao.mybatis.model.ProductionPlanBean;
 
 /**
  * @author Administrator
@@ -24,27 +25,52 @@ public interface ProductService {
 	public String validateParams(String sfzhm,String icno);
 	
 	/**
-	 * 查询信息（多条）
-	 * @param typeid
+	 * 查询信息 production
+	 * @param clazzId
 	 * @param page
 	 * @param pageSize
 	 * @return
 	 */
-	List<ProductBean> selectByParams(String typeId,String page,String pageSize);
+	List<ProductionBeanWithBLOBs> selectProductions(String clazzId,String page,String pageSize);
+	/**
+	 * 查询信息 productionPlan
+	 * @param productionId
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
+	List<ProductionPlanBean> selectProductionPlans(String productionId,String page,String pageSize);
 	
 	/**
-	 * 查询信息（单条）
-	 * @param typeid
-	 * @param page
-	 * @param pageSize
+	 * 查询信息（单条） production
+	 * @param productId
 	 * @return
 	 */
-	ProductBean selectById(String productId);
+	ProductionBeanWithBLOBs selectById(String productId);
 
 	/**
-	 * 修改信息
+	 * 新增商品信息
 	 * @param bean
 	 * @return
 	 */
-	HashMap<String, Object> eidt(ProductBean bean);
+	int addProduction();
+	/**
+	 * 修改商品信息
+	 * @param bean
+	 * @return
+	 */
+	int editProduction();
+	
+	/**
+	 * 新增商品计划信息
+	 * @param bean
+	 * @return
+	 */
+	int addProductionPlan();
+	/**
+	 * 修改商品计划信息
+	 * @param bean
+	 * @return
+	 */
+	int editProductionPlan();
 }

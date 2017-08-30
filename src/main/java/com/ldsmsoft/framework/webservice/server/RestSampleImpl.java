@@ -13,8 +13,13 @@ import javax.ws.rs.core.UriInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ldsmsoft.framework.dao.mybatis.model.SYSResourceBean;
+import com.ldsmsoft.framework.dao.mybatis.model.ClazzBean;
+import com.ldsmsoft.framework.dao.mybatis.model.ProductionBean;
+import com.ldsmsoft.framework.dao.mybatis.model.ProductionBeanWithBLOBs;
+import com.ldsmsoft.framework.dao.mybatis.model.ProductionPlanBean;
 import com.ldsmsoft.framework.service.AuthClientService;
+import com.ldsmsoft.framework.service.ClazzService;
+import com.ldsmsoft.framework.service.ProductService;
 import com.ldsmsoft.framework.service.ResourceService;
 import com.ldsmsoft.framework.service.UserService;
 import com.ldsmsoft.framework.util.CheckIDCard;
@@ -25,17 +30,17 @@ import com.ldsmsoft.framework.util.Util;
 
 public class RestSampleImpl implements RestSample {
 
-	//卡管接口的user、pass和url
+	// 读取properties文件示例
 	private static final String STATIC_USER = FileReadUtil.ReadProperties("card.properties","user");
-	private static final String STATIC_PASS = FileReadUtil.ReadProperties("card.properties","pass");
-	private static final String STATIC_URL = FileReadUtil.ReadProperties("card.properties","url");
 	
 	@Autowired
 	private AuthClientService authClientService;
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private ResourceService resourceService;
+	private ClazzService clazzService;
+	@Autowired
+	private ProductService productService;
 
 	@Context  
     private UriInfo uriInfo;
@@ -52,10 +57,134 @@ public class RestSampleImpl implements RestSample {
 	public String doRequest(@PathParam("param") String param, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
         return "success";  
 	}
+
+	HashMap<String,Object> resultMap = new HashMap<String,Object>();
+	/**
+     * 获取商品分类(多条)
+	 */
+	@Override
+	public HashMap<String, Object> getClazzs() {
+		//验证授权信息是否存在及是否有效
+		/*HashMap<String, Object> state = authClientService.validateAuth(clientId,clientSecret);
+		if(!"200".equals(state.get("status"))){
+			return state;
+		}*/
+		List<ClazzBean> resList=clazzService.selectByParams();
+		resultMap.put("msg","数据获取成功！");
+		resultMap.put("status",Common_Status.Common_Status_200);
+		resultMap.put("result",resList);
+		return resultMap;
+	}
+	/**
+     * 获取商品(多条)
+	 */
+	@Override
+	public HashMap<String, Object> getProductions(String clazzId,String page,String pageSize) {
+		//验证授权信息是否存在及是否有效
+		/*HashMap<String, Object> state = authClientService.validateAuth(clientId,clientSecret);
+		if(!"200".equals(state.get("status"))){
+			return state;
+		}*/
+		//clazzId不能为空
+		if(Util.isEmpty(clazzId)){
+			resultMap.put("msg", "clazzId不能为空！");
+			resultMap.put("status",Common_Status.Common_Status_ISNULL);
+			return resultMap;
+		}
+		List<ProductionBeanWithBLOBs> resList=productService.selectProductions(clazzId, page, pageSize);
+		resultMap.put("msg","数据获取成功！");
+		resultMap.put("status",Common_Status.Common_Status_200);
+		resultMap.put("result",resList);
+		return resultMap;
+	}
+	/**
+	 * 获取商品计划(多条)
+	 */
+	@Override
+	public HashMap<String, Object> getProductionPlans(String productionId,String page,String pageSize) {
+		HashMap<String,Object> resultMap = new HashMap<String,Object>();
+		//验证授权信息是否存在及是否有效
+		/*HashMap<String, Object> state = authClientService.validateAuth(clientId,clientSecret);
+		if(!"200".equals(state.get("status"))){
+			return state;
+		}*/
+		//productionId不能为空
+		if(Util.isEmpty(productionId)){
+			resultMap.put("msg", "productionId不能为空！");
+			resultMap.put("status",Common_Status.Common_Status_ISNULL);
+			return resultMap;
+		}
+		List<ProductionPlanBean> resList=productService.selectProductionPlans(productionId, page, pageSize);
+		resultMap.put("msg","数据获取成功！");
+		resultMap.put("status",Common_Status.Common_Status_200);
+		resultMap.put("result",resList);
+		return resultMap;
+	}
+	/**
+	 * 新增商品
+	 */
+	@Override
+	public HashMap<String, Object> addProduction() {
+		int res =productService.addProduction();
+		resultMap.put("msg","处理成功！");
+		resultMap.put("status",Common_Status.Common_Status_200);
+		resultMap.put("result","");
+		return resultMap;
+	}
+	/**
+	 * 修改商品
+	 */
+	@Override
+	public HashMap<String, Object> eidtProduction() {
+		int res =productService.editProduction();
+		resultMap.put("msg","处理成功！");
+		resultMap.put("status",Common_Status.Common_Status_200);
+		resultMap.put("result","");
+		return resultMap;
+	}
+	/**
+	 * 新增商品计划
+	 */
+	@Override
+	public HashMap<String, Object> addProductionPlan() {
+		int res =productService.addProduction();
+		resultMap.put("msg","处理成功！");
+		resultMap.put("status",Common_Status.Common_Status_200);
+		resultMap.put("result","");
+		return resultMap;
+	}
+	/**
+	 * 修改商品计划
+	 */
+	@Override
+	public HashMap<String, Object> editProductionPlan() {
+		int res =productService.editProduction();
+		resultMap.put("msg","处理成功！");
+		resultMap.put("status",Common_Status.Common_Status_200);
+		resultMap.put("result","");
+		return resultMap;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * 注册
-	 */
+	 
 	@Override
 	public HashMap<String, Object> regUser(String userName,String tel,String loginName, String password) {
 		HashMap<String,Object> resultMap = new HashMap<String,Object>();
@@ -180,11 +309,11 @@ public class RestSampleImpl implements RestSample {
 		}
 		return resultMap;
 	}
-	
+
 	/**
 	 * 获取用户的权限
 	 */
-	@Override
+	/*@Override
 	public HashMap<String, Object> getPersonPower(String token,String clientId, String clientSecret, String userId) {
 		HashMap<String,Object> resultMap = new HashMap<String,Object>();
 		//验证授权信息是否存在及是否有效
@@ -204,5 +333,5 @@ public class RestSampleImpl implements RestSample {
 			resultMap.put("status",Common_Status.Common_Status_ISNULL);
 		}
 		return resultMap;
-	}
+	}*/
 }

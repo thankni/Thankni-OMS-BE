@@ -7,51 +7,31 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import com.ldsmsoft.framework.dao.mybatis.dao.ProductBeanMapper;
-import com.ldsmsoft.framework.dao.mybatis.model.ProductBean;
-import com.ldsmsoft.framework.dao.mybatis.model.TypeBean;
+import com.ldsmsoft.framework.dao.mybatis.dao.ProductionBeanMapper;
+import com.ldsmsoft.framework.dao.mybatis.dao.ProductionPlanBeanMapper;
+import com.ldsmsoft.framework.dao.mybatis.model.ProductionBeanWithBLOBs;
+import com.ldsmsoft.framework.dao.mybatis.model.ProductionPlanBean;
 import com.ldsmsoft.framework.util.CheckIDCard;
 import com.ldsmsoft.framework.util.Util;;
 
 @Service("ProductService")
 public class ProductServiceImpl implements ProductService {
 	
-	private Long grbh;
-	private ProductBeanMapper productMapper;
+	private ProductionBeanMapper productMapper;
+	private ProductionPlanBeanMapper productPlanMapper;
 	
 	// Logger instance
-    private static final Logger logger = Logger.getLogger(PersonServiceImpl.class);
+    private static final Logger logger = Logger.getLogger(ProductServiceImpl.class);
 
-	/**
-	 * 验证参数是否符合要求
-	 */
-	@Override
-	public String validateParams(String sfzhm,String icno){
-		String errorInfo = "";
-		try {
-			String errorInfo1 = CheckIDCard.IDCardValidate(sfzhm);
-			if(("").equals(errorInfo)){
-				if(!Util.isEmpty(icno)){
-					errorInfo="";
-				}else{
-					errorInfo="";
-				}
-			}else{
-				errorInfo = errorInfo1;
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return errorInfo;
-	}
+	
 	
 	/**
-	 * 查询信息
+	 * 查询信息 production list
 	 */
 	@Override
-	public List<ProductBean> selectByParams(String typeid,String page,String pageSize) {
+	public List<ProductionBeanWithBLOBs> selectProductions(String clazzId,String page,String pageSize) {
 		HashMap<String,Object> map = new HashMap<String,Object>();
-		map.put("typeId",typeid);
+		map.put("clazzId",clazzId);
 		
 		//页码
 		if(!Util.isEmpty(page)){
@@ -65,28 +45,76 @@ public class ProductServiceImpl implements ProductService {
 		}else{
 			map.put("pageSize", 10);
 		}
-		List<ProductBean> list = productMapper.selectByParams(map);
+		List<ProductionBeanWithBLOBs> list = productMapper.selectByParams(map);
 		return list;
 	}
 	/**
-	 * 查询信息（单条）
+	 * 查询信息 productionPlan list
 	 */
 	@Override
-	public ProductBean selectById(String productId) {
+	public List<ProductionPlanBean> selectProductionPlans(String productionId,String page,String pageSize) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("fkProductionId",productionId);
+		
+		//页码
+		if(!Util.isEmpty(page)){
+			map.put("page", Integer.parseInt(page));
+		}else{
+			map.put("page", 1);
+		}
+		//每页条数
+		if(!Util.isEmpty(pageSize)){
+			map.put("pageSize", Integer.parseInt(pageSize));
+		}else{
+			map.put("pageSize", 10);
+		}
+		List<ProductionPlanBean> list = productPlanMapper.selectByParams(map);
+		return list;
+	}
+	/**
+	 * 查询信息（单条）production
+	 */
+	@Override
+	public ProductionBeanWithBLOBs selectById(String productId) {
 		return productMapper.selectByPrimaryKey(Long.parseLong(productId));
 	}	
 	/**
-	 * 修改信息
+	 * 新增商品信息
 	 */
 	@Override
-	public HashMap<String, Object> eidt(ProductBean bean) {
+	public int addProduction() {
 
-		HashMap<String, Object> resultMap = new HashMap<String,Object>();
-		
-		productMapper.updateByPrimaryKeySelective(bean);
-		
-		return resultMap;
+		ProductionBeanWithBLOBs bean = new ProductionBeanWithBLOBs();
+		int res = productMapper.insertSelective(bean);
+		return res;
+	}
+	/**
+	 * 修改商品信息
+	 */
+	@Override
+	public int editProduction() {
+
+		ProductionBeanWithBLOBs bean = new ProductionBeanWithBLOBs();
+		int res = productMapper.updateByPrimaryKeySelective(bean);
+		return res;
+	}
+	/**
+	 * 新增商品计划信息
+	 */
+	@Override
+	public int addProductionPlan() {
+		ProductionPlanBean bean = new ProductionPlanBean();
+		int res = productPlanMapper.insertSelective(bean);
+		return res;
+	}
+	/**
+	 * 修改商品计划信息
+	 */
+	@Override
+	public int editProductionPlan() {
+		ProductionPlanBean bean = new ProductionPlanBean();
+		int res = productPlanMapper.updateByPrimaryKeySelective(bean);
+		return res;
 	}
 
-	
 }

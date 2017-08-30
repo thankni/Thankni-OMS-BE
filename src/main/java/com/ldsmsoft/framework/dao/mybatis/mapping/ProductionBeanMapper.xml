@@ -26,6 +26,20 @@
   <sql id="Blob_Column_List" >
     description, label
   </sql>
+  
+  <select id="selectByParams" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    SELECT *
+	  FROM (
+	    SELECT ROWNUM AS ROWNO,
+	    <include refid="Base_Column_List" />
+	    ,
+	    <include refid="Blob_Column_List" />
+	    FROM production
+	    WHERE fk_clazz_id = #{clazzId,jdbcType=DECIMAL}
+	    AND ROWNUM &lt;= #{page}*#{pageSize}) TABLE_ALIAS
+    WHERE TABLE_ALIAS.ROWNO &gt;= (#{page}-1)*#{pageSize}+1  
+  </select>
+    
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

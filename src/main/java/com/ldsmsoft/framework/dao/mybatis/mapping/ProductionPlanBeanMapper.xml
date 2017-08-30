@@ -18,6 +18,16 @@
     id, fk_production_id, name, price, market_price, sales_volume, likes, unlikes, fk_create_user_id, 
     create_time, update_time
   </sql>
+  <select id="selectByParams" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    SELECT *
+	  FROM (
+	    SELECT ROWNUM AS ROWNO,
+	    <include refid="Base_Column_List" />
+	    FROM production_plan
+	    WHERE fk_production_id = #{fkProductionId,jdbcType=BIGINT}
+	    AND ROWNUM &lt;= #{page}*#{pageSize}) TABLE_ALIAS
+    WHERE TABLE_ALIAS.ROWNO &gt;= (#{page}-1)*#{pageSize}+1  
+  </select>  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

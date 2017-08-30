@@ -18,6 +18,14 @@
   <sql id="Blob_Column_List" >
     description
   </sql>
+  <select id="selectByParams" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from clazz T
+    WHERE T.STATUS = '1'
+  </select>  
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

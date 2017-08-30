@@ -1,5 +1,8 @@
 package com.ldsmsoft.framework.dao.mybatis.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.ldsmsoft.framework.dao.mybatis.model.ClazzBean;
 
 public interface ClazzBeanMapper {
@@ -16,4 +19,6 @@ public interface ClazzBeanMapper {
     int updateByPrimaryKeyWithBLOBs(ClazzBean record);
 
     int updateByPrimaryKey(ClazzBean record);
+
+    List<ClazzBean> selectByParams(HashMap<String,Object> params);
 }

@@ -1,5 +1,8 @@
 package com.ldsmsoft.framework.dao.mybatis.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.ldsmsoft.framework.dao.mybatis.model.ProductionPlanBean;
 
 public interface ProductionPlanBeanMapper {
@@ -14,4 +17,6 @@ public interface ProductionPlanBeanMapper {
     int updateByPrimaryKeySelective(ProductionPlanBean record);
 
     int updateByPrimaryKey(ProductionPlanBean record);
+
+	List<ProductionPlanBean> selectByParams(HashMap<String, Object> map);
 }
