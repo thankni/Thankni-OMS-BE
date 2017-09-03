@@ -27,11 +27,6 @@ public class Util {
 		return code;
 	}
 	
-	public static boolean isEmpty(String str)
-	{
-	  return (str == null) || ("".equals(str.trim()));
-	}
-	
 	/**
 	 * 身份证号码加密处理，除了前面两位和后面两位，其他都替换成*
 	 * @param idcard

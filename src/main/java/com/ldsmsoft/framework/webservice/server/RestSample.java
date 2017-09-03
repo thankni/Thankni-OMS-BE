@@ -12,6 +12,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import com.ldsmsoft.framework.dao.mybatis.model.ProductionBeanWithBLOBs;
+import com.ldsmsoft.framework.dao.mybatis.model.ProductionPlanBean;
+
 public interface RestSample {  
   
     @GET  //@GET、@PUT、@POST、@DELETE：标注方法的HTTP请求类型。
@@ -41,11 +44,19 @@ public interface RestSample {
     @Produces({ MediaType.APPLICATION_JSON })   
     HashMap<String, Object> getProductions(String clazzId,String page,String pageSize);
     /**
+     * 获取商品(单条)
+     * @return
+     */
+    @GET  
+    @Path("/QU3003/{productionId}")  
+    @Produces({ MediaType.APPLICATION_JSON })   
+    HashMap<String, Object> getProduction(String productionId);
+    /**
      * 获取商品计划(多条)
      * @return
      */
     @GET  
-    @Path("/QU3003/{productionId}/{page}/{pageSize}")  
+    @Path("/QU3004/{productionId}/{page}/{pageSize}")  
     @Produces({ MediaType.APPLICATION_JSON })   
     HashMap<String, Object> getProductionPlans(String productionId,String page,String pageSize);
     /**
@@ -55,7 +66,7 @@ public interface RestSample {
     @GET  
     @Path("/AD3001")  
     @Produces(MediaType.APPLICATION_JSON)   
-    HashMap<String, Object> addProduction();
+    HashMap<String, Object> addProduction(ProductionBeanWithBLOBs production);
     /**
      * 修改商品
      * @return
@@ -63,7 +74,7 @@ public interface RestSample {
     @GET  
     @Path("/ED3001")  
     @Produces(MediaType.APPLICATION_JSON)   
-    HashMap<String, Object> eidtProduction();
+    HashMap<String, Object> eidtProduction(ProductionBeanWithBLOBs production);
     /**
      * 新增商品计划
      * @return
@@ -71,7 +82,7 @@ public interface RestSample {
     @GET  
     @Path("/AD3002")  
     @Produces(MediaType.APPLICATION_JSON)   
-    HashMap<String, Object> addProductionPlan();
+    HashMap<String, Object> addProductionPlan(ProductionPlanBean productionPlan);
     /**
      * 新增商品计划
      * @return
@@ -79,7 +90,7 @@ public interface RestSample {
     @GET  
     @Path("/ED3002")  
     @Produces(MediaType.APPLICATION_JSON)   
-    HashMap<String, Object> editProductionPlan();
+    HashMap<String, Object> editProductionPlan(ProductionPlanBean productionPlan);
     
     
    /**

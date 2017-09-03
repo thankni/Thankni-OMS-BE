@@ -16,7 +16,7 @@ public interface ClazzService {
 	 * 查询商品分类信息
 	 * @return
 	 */
-	public List<ClazzBean> selectByParams();
+	public HashMap<String, Object> selectByParams();
 	
 	/**
 	 * 修改商品分类信息

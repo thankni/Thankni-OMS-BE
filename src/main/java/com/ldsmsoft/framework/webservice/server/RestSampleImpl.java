@@ -27,6 +27,7 @@ import com.ldsmsoft.framework.util.CheckUtil;
 import com.ldsmsoft.framework.util.FileReadUtil;
 import com.ldsmsoft.framework.util.GlobalStatic.Common_Status;
 import com.ldsmsoft.framework.util.Util;
+import com.ldsmsoft.framework.util.UtilEmpty;
 
 public class RestSampleImpl implements RestSample {
 
@@ -69,100 +70,56 @@ public class RestSampleImpl implements RestSample {
 		if(!"200".equals(state.get("status"))){
 			return state;
 		}*/
-		List<ClazzBean> resList=clazzService.selectByParams();
-		resultMap.put("msg","数据获取成功！");
-		resultMap.put("status",Common_Status.Common_Status_200);
-		resultMap.put("result",resList);
-		return resultMap;
+		return clazzService.selectByParams();
 	}
 	/**
      * 获取商品(多条)
 	 */
 	@Override
 	public HashMap<String, Object> getProductions(String clazzId,String page,String pageSize) {
-		//验证授权信息是否存在及是否有效
-		/*HashMap<String, Object> state = authClientService.validateAuth(clientId,clientSecret);
-		if(!"200".equals(state.get("status"))){
-			return state;
-		}*/
-		//clazzId不能为空
-		if(Util.isEmpty(clazzId)){
-			resultMap.put("msg", "clazzId不能为空！");
-			resultMap.put("status",Common_Status.Common_Status_ISNULL);
-			return resultMap;
-		}
-		List<ProductionBeanWithBLOBs> resList=productService.selectProductions(clazzId, page, pageSize);
-		resultMap.put("msg","数据获取成功！");
-		resultMap.put("status",Common_Status.Common_Status_200);
-		resultMap.put("result",resList);
-		return resultMap;
+		return productService.selectProductions(clazzId, page, pageSize);
+	}
+	/**
+	 * 获取商品(多条)
+	 */
+	@Override
+	public HashMap<String, Object> getProduction(String productionId) {
+		return productService.selectProductionById(productionId);
 	}
 	/**
 	 * 获取商品计划(多条)
 	 */
 	@Override
 	public HashMap<String, Object> getProductionPlans(String productionId,String page,String pageSize) {
-		HashMap<String,Object> resultMap = new HashMap<String,Object>();
-		//验证授权信息是否存在及是否有效
-		/*HashMap<String, Object> state = authClientService.validateAuth(clientId,clientSecret);
-		if(!"200".equals(state.get("status"))){
-			return state;
-		}*/
-		//productionId不能为空
-		if(Util.isEmpty(productionId)){
-			resultMap.put("msg", "productionId不能为空！");
-			resultMap.put("status",Common_Status.Common_Status_ISNULL);
-			return resultMap;
-		}
-		List<ProductionPlanBean> resList=productService.selectProductionPlans(productionId, page, pageSize);
-		resultMap.put("msg","数据获取成功！");
-		resultMap.put("status",Common_Status.Common_Status_200);
-		resultMap.put("result",resList);
-		return resultMap;
+		return productService.selectProductionPlans(productionId, page, pageSize);
 	}
 	/**
 	 * 新增商品
 	 */
 	@Override
-	public HashMap<String, Object> addProduction() {
-		int res =productService.addProduction();
-		resultMap.put("msg","处理成功！");
-		resultMap.put("status",Common_Status.Common_Status_200);
-		resultMap.put("result","");
-		return resultMap;
+	public HashMap<String, Object> addProduction(ProductionBeanWithBLOBs production) {
+		return productService.addProduction(production);
 	}
 	/**
 	 * 修改商品
 	 */
 	@Override
-	public HashMap<String, Object> eidtProduction() {
-		int res =productService.editProduction();
-		resultMap.put("msg","处理成功！");
-		resultMap.put("status",Common_Status.Common_Status_200);
-		resultMap.put("result","");
-		return resultMap;
+	public HashMap<String, Object> eidtProduction(ProductionBeanWithBLOBs production) {
+		return productService.editProduction(production);
 	}
 	/**
 	 * 新增商品计划
 	 */
 	@Override
-	public HashMap<String, Object> addProductionPlan() {
-		int res =productService.addProduction();
-		resultMap.put("msg","处理成功！");
-		resultMap.put("status",Common_Status.Common_Status_200);
-		resultMap.put("result","");
-		return resultMap;
+	public HashMap<String, Object> addProductionPlan(ProductionPlanBean productionPlan) {
+		return productService.addProductionPlan(productionPlan);
 	}
 	/**
 	 * 修改商品计划
 	 */
 	@Override
-	public HashMap<String, Object> editProductionPlan() {
-		int res =productService.editProduction();
-		resultMap.put("msg","处理成功！");
-		resultMap.put("status",Common_Status.Common_Status_200);
-		resultMap.put("result","");
-		return resultMap;
+	public HashMap<String, Object> editProductionPlan(ProductionPlanBean productionPlan) {
+		return productService.editProductionPlan(productionPlan);
 	}
 
 	
@@ -190,25 +147,25 @@ public class RestSampleImpl implements RestSample {
 		HashMap<String,Object> resultMap = new HashMap<String,Object>();
 			
 		//用户姓名不能为空
-		if(!Util.isEmpty(userName)){
+		if(!UtilEmpty.isNullorEmpty(userName)){
 			resultMap.put("msg", "姓名不能为空！");
 			resultMap.put("status",Common_Status.Common_Status_ISNULL);
 			return resultMap;
 		}
 		//手机号不能为空
-		if(Util.isEmpty(tel)){
+		if(UtilEmpty.isNullorEmpty(tel)){
 			resultMap.put("msg", "手机号不能为空！");
 			resultMap.put("status",Common_Status.Common_Status_ISNULL);
 			return resultMap;
 		}
 		//登录名不能为空
-		if(Util.isEmpty(loginName)){
+		if(UtilEmpty.isNullorEmpty(loginName)){
 			resultMap.put("msg", "登录名不能为空！");
 			resultMap.put("status",Common_Status.Common_Status_ISNULL);
 			return resultMap;
 		}
 		//密码不能为空
-		if(Util.isEmpty(password)){
+		if(UtilEmpty.isNullorEmpty(password)){
 			resultMap.put("msg", "密码不能为空！");
 			resultMap.put("status",Common_Status.Common_Status_ISNULL);
 			return resultMap;
@@ -231,7 +188,7 @@ public class RestSampleImpl implements RestSample {
 		}
 		
 		//userId不能为空
-		if(!Util.isEmpty(userId)){
+		if(!UtilEmpty.isNullorEmpty(userId)){
 			resultMap.put("msg", "userId不能为空！");
 			resultMap.put("status",Common_Status.Common_Status_ISNULL);
 			return resultMap;
@@ -239,7 +196,7 @@ public class RestSampleImpl implements RestSample {
 			Id = Long.parseLong(userId);
 		}
 		//姓名校验
-		if(!Util.isEmpty(tel)){
+		if(!UtilEmpty.isNullorEmpty(tel)){
 			if(!CheckUtil.checkName(userName)){
 				resultMap.put("msg", "姓名格式错误！");
 				resultMap.put("status",Common_Status.Common_Status_604);
@@ -247,7 +204,7 @@ public class RestSampleImpl implements RestSample {
 			};
 		}
 		//邮箱校验
-		if(!Util.isEmpty(email)){
+		if(!UtilEmpty.isNullorEmpty(email)){
 			if(!CheckUtil.checkEmail(email)){
 				resultMap.put("msg", "邮箱格式错误！");
 				resultMap.put("status",Common_Status.Common_Status_602);
@@ -255,7 +212,7 @@ public class RestSampleImpl implements RestSample {
 			};
 		}
 		//身份证号校验
-		if(!Util.isEmpty(idcard)){
+		if(!UtilEmpty.isNullorEmpty(idcard)){
 			String aac002_new;
 			try {
 				aac002_new = CheckIDCard.IDCardValidate(idcard);// 15位身份证号转换为18位
@@ -277,7 +234,7 @@ public class RestSampleImpl implements RestSample {
 			}
 		}
 		//手机号校验
-		if(!Util.isEmpty(tel)){
+		if(!UtilEmpty.isNullorEmpty(tel)){
 			if(!CheckUtil.checkPhone(tel)){
 				resultMap.put("msg", "手机号格式错误！");
 				resultMap.put("status",Common_Status.Common_Status_601);
@@ -300,7 +257,7 @@ public class RestSampleImpl implements RestSample {
 			return state;
 		}
 		//登录名和密码的非空校验		
-		if(!Util.isEmpty(loginName) && !Util.isEmpty(password) && !Util.isEmpty(token)){
+		if(!UtilEmpty.isNullorEmpty(loginName) && !UtilEmpty.isNullorEmpty(password) && !UtilEmpty.isNullorEmpty(token)){
 			//登录：获取注册信息
 			resultMap=userService.getRegInfo(loginName, password,token);
 		}else{
@@ -308,6 +265,12 @@ public class RestSampleImpl implements RestSample {
 			resultMap.put("status",Common_Status.Common_Status_301);
 		}
 		return resultMap;
+	}
+
+	@Override
+	public HashMap<String, Object> regUser(String name, String tel, String loginName, String password) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**
@@ -322,7 +285,7 @@ public class RestSampleImpl implements RestSample {
 			return state;
 		}
 		//登录名和密码的非空校验		
-		if(!Util.isEmpty(userId)){
+		if(!UtilEmpty.isNullorEmpty(userId)){
 			//登录：获取注册信息
 			List<SYSResourceBean> resList=resourceService.selectByUserId(Long.parseLong(userId));
 			resultMap.put("msg","数据获取成功！");
