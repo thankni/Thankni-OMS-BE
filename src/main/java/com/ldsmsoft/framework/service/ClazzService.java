@@ -23,14 +23,14 @@ public interface ClazzService {
 	 * @param bean
 	 * @return
 	 */
-	int eidt(ClazzBean bean);
+	HashMap<String, Object> eidt(ClazzBean bean);
 
 	/**
 	 * 新增商品分类信息
 	 * @param bean
 	 * @return
 	 */
-	int insert(ClazzBean bean);
+	HashMap<String, Object> insert(ClazzBean bean);
 
 
 }

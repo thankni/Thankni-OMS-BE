@@ -257,6 +257,17 @@ public class DateUtil
 		return sqlDate;
     }
     
+    /**
+     * @$comment 将当前系统时间 java.util.Date 转成 java.sql.Date
+     * @param date java.util.Date
+     * @return java.sql.Date
+     * @throws AppException
+     */
+    public static java.sql.Date getSqlDateForNow() throws AppException{
+        java.sql.Date sqlDate= new java.sql.Date(new Date().getTime());
+		return sqlDate;
+    }    
+    
     
 	/**
 	 * 年月往前往后变化几个月

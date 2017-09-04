@@ -6,10 +6,12 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import com.common.webconfig.AppException;
 import com.ldsmsoft.framework.dao.mybatis.dao.ProductionBeanMapper;
 import com.ldsmsoft.framework.dao.mybatis.dao.ProductionPlanBeanMapper;
 import com.ldsmsoft.framework.dao.mybatis.model.ProductionBeanWithBLOBs;
 import com.ldsmsoft.framework.dao.mybatis.model.ProductionPlanBean;
+import com.ldsmsoft.framework.util.DateUtil;
 import com.ldsmsoft.framework.util.GlobalStatic.Common_Status;
 import com.ldsmsoft.framework.util.UtilEmpty;;
 
@@ -110,7 +112,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public HashMap<String, Object> selectProductionById(String procudtionId) {
 		// 商品procudtionId校验
-		if (!UtilEmpty.isNullorEmpty(procudtionId)) {
+		if (UtilEmpty.isNullorEmpty(procudtionId)) {
 			resultMap.put("msg", "商品procudtionId不能为空！");
 			resultMap.put("status", Common_Status.Common_Status_ISNULL);
 			resultMap.put("result", "");
@@ -136,19 +138,27 @@ public class ProductServiceImpl implements ProductService {
 	public HashMap<String, Object> addProduction(ProductionBeanWithBLOBs bean) {
 
 		// 商品名称校验
-		if (!UtilEmpty.isNullorEmpty(bean.getName())) {
+		if (UtilEmpty.isNullorEmpty(bean.getName())) {
 			resultMap.put("msg", "商品名称name不能为空！");
 			resultMap.put("status", Common_Status.Common_Status_ISNULL);
 			resultMap.put("result", "");
 			return resultMap;
 		}
 		// 商品标签校验
-		if (!UtilEmpty.isNullorEmpty(bean.getLabel())) {
+		if (UtilEmpty.isNullorEmpty(bean.getLabel())) {
 			resultMap.put("msg", "商品标签label不能为空！");
 			resultMap.put("status", Common_Status.Common_Status_ISNULL);
 			resultMap.put("result", "");
 			return resultMap;
 		}
+		
+		try {
+			bean.setCreateTime(DateUtil.getSqlDateForNow());
+		} catch (AppException e) {
+			e.printStackTrace();
+		}
+		bean.setStatus(1);
+		
 		int res = productMapper.insertSelective(bean);
 		if (res > 0) {
 			resultMap.put("msg", "处理成功！");
@@ -169,26 +179,33 @@ public class ProductServiceImpl implements ProductService {
 	public HashMap<String, Object> editProduction(ProductionBeanWithBLOBs bean) {
 
 		// 商品id校验
-		if (!UtilEmpty.isNullorEmpty(bean.getId())) {
+		if (UtilEmpty.isNullorEmpty(bean.getId())) {
 			resultMap.put("msg", "商品id不能为空！");
 			resultMap.put("status", Common_Status.Common_Status_ISNULL);
 			resultMap.put("result", "");
 			return resultMap;
 		}
 		// 商品名称校验
-		if (!UtilEmpty.isNullorEmpty(bean.getName())) {
+		if (UtilEmpty.isNullorEmpty(bean.getName())) {
 			resultMap.put("msg", "商品名称name不能为空！");
 			resultMap.put("status", Common_Status.Common_Status_ISNULL);
 			resultMap.put("result", "");
 			return resultMap;
 		}
 		// 商品标签校验
-		if (!UtilEmpty.isNullorEmpty(bean.getLabel())) {
+		if (UtilEmpty.isNullorEmpty(bean.getLabel())) {
 			resultMap.put("msg", "商品标签label不能为空！");
 			resultMap.put("status", Common_Status.Common_Status_ISNULL);
 			resultMap.put("result", "");
 			return resultMap;
 		}
+		
+		try {
+			bean.setUpdateTime(DateUtil.getSqlDateForNow());
+		} catch (AppException e) {
+			e.printStackTrace();
+		}
+		
 		int res = productMapper.updateByPrimaryKeySelective(bean);
 		if (res > 0) {
 			resultMap.put("msg", "处理成功！");
@@ -210,19 +227,26 @@ public class ProductServiceImpl implements ProductService {
 	public HashMap<String, Object> addProductionPlan(ProductionPlanBean bean) {
 
 		// 商品id校验
-		if (!UtilEmpty.isNullorEmpty(bean.getFkProductionId())) {
+		if (UtilEmpty.isNullorEmpty(bean.getFkProductionId())) {
 			resultMap.put("msg", "商品fkProductionId不能为空！");
 			resultMap.put("status", Common_Status.Common_Status_ISNULL);
 			resultMap.put("result", "");
 			return resultMap;
 		}
 		// 商品计划名称校验
-		if (!UtilEmpty.isNullorEmpty(bean.getName())) {
+		if (UtilEmpty.isNullorEmpty(bean.getName())) {
 			resultMap.put("msg", "商品计划名称name不能为空！");
 			resultMap.put("status", Common_Status.Common_Status_ISNULL);
 			resultMap.put("result", "");
 			return resultMap;
 		}
+		
+		try {
+			bean.setCreateTime(DateUtil.getSqlDateForNow());
+		} catch (AppException e) {
+			e.printStackTrace();
+		}
+		
 		int res = productPlanMapper.insertSelective(bean);
 		if (res > 0) {
 			resultMap.put("msg", "处理成功！");
@@ -242,26 +266,33 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public HashMap<String, Object> editProductionPlan(ProductionPlanBean bean) {
 		// 商品计划id校验
-		if (!UtilEmpty.isNullorEmpty(bean.getId())) {
+		if (UtilEmpty.isNullorEmpty(bean.getId())) {
 			resultMap.put("msg", "商品计划id不能为空！");
 			resultMap.put("status", Common_Status.Common_Status_ISNULL);
 			resultMap.put("result", "");
 			return resultMap;
 		}
 		// 商品fkProductionId校验
-		if (!UtilEmpty.isNullorEmpty(bean.getFkProductionId())) {
+		if (UtilEmpty.isNullorEmpty(bean.getFkProductionId())) {
 			resultMap.put("msg", "商品fkProductionId不能为空！");
 			resultMap.put("status", Common_Status.Common_Status_ISNULL);
 			resultMap.put("result", "");
 			return resultMap;
 		}
 		// 商品计划名称校验
-		if (!UtilEmpty.isNullorEmpty(bean.getName())) {
+		if (UtilEmpty.isNullorEmpty(bean.getName())) {
 			resultMap.put("msg", "商品计划名称name不能为空！");
 			resultMap.put("status", Common_Status.Common_Status_ISNULL);
 			resultMap.put("result", "");
 			return resultMap;
 		}
+		
+		try {
+			bean.setUpdateTime(DateUtil.getSqlDateForNow());
+		} catch (AppException e) {
+			e.printStackTrace();
+		}
+		
 		int res = productPlanMapper.updateByPrimaryKeySelective(bean);
 		if (res > 0) {
 			resultMap.put("msg", "处理成功！");
