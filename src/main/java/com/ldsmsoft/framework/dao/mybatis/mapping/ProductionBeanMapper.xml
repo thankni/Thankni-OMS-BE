@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldsmsoft.framework.dao.mybatis.dao.ProductionBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.ldsmsoft.framework.dao.mybatis.model.ProductionBean" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="field" property="field" jdbcType="VARCHAR" />
+    <result column="fk_clazz_id" property="fkClazzId" jdbcType="BIGINT" />
+    <result column="fk_header_id" property="fkHeaderId" jdbcType="BIGINT" />
+    <result column="fk_create_user_id" property="fkCreateUserId" jdbcType="BIGINT" />
+    <result column="fk_footer_id" property="fkFooterId" jdbcType="BIGINT" />
+    <result column="discount" property="discount" jdbcType="DOUBLE" />
+    <result column="cost_price" property="costPrice" jdbcType="DOUBLE" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ldsmsoft.framework.dao.mybatis.model.ProductionBeanWithBLOBs" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+    <result column="label" property="label" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, field, fk_clazz_id, fk_header_id, fk_create_user_id, fk_footer_id, discount, 
+    cost_price, status, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    description, label
+  </sql>
+  
+  <select id="selectByParams" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    SELECT *
+	  FROM (
+	    SELECT ROWNUM AS ROWNO,
+	    <include refid="Base_Column_List" />
+	    ,
+	    <include refid="Blob_Column_List" />
+	    FROM production
+	    WHERE fk_clazz_id = #{clazzId,jdbcType=DECIMAL}
+	    AND ROWNUM &lt;= #{page}*#{pageSize}) TABLE_ALIAS
+    WHERE TABLE_ALIAS.ROWNO &gt;= (#{page}-1)*#{pageSize}+1  
+  </select>
+    
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from production
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from production
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ProductionBeanWithBLOBs" >
+    insert into production (id, name, field, 
+      fk_clazz_id, fk_header_id, fk_create_user_id, 
+      fk_footer_id, discount, cost_price, 
+      status, create_time, update_time, 
+      description, label)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{field,jdbcType=VARCHAR}, 
+      #{fkClazzId,jdbcType=BIGINT}, #{fkHeaderId,jdbcType=BIGINT}, #{fkCreateUserId,jdbcType=BIGINT}, 
+      #{fkFooterId,jdbcType=BIGINT}, #{discount,jdbcType=DOUBLE}, #{costPrice,jdbcType=DOUBLE}, 
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{description,jdbcType=LONGVARCHAR}, #{label,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ProductionBeanWithBLOBs" >
+    insert into production
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="field != null" >
+        field,
+      </if>
+      <if test="fkClazzId != null" >
+        fk_clazz_id,
+      </if>
+      <if test="fkHeaderId != null" >
+        fk_header_id,
+      </if>
+      <if test="fkCreateUserId != null" >
+        fk_create_user_id,
+      </if>
+      <if test="fkFooterId != null" >
+        fk_footer_id,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="costPrice != null" >
+        cost_price,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="label != null" >
+        label,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="field != null" >
+        #{field,jdbcType=VARCHAR},
+      </if>
+      <if test="fkClazzId != null" >
+        #{fkClazzId,jdbcType=BIGINT},
+      </if>
+      <if test="fkHeaderId != null" >
+        #{fkHeaderId,jdbcType=BIGINT},
+      </if>
+      <if test="fkCreateUserId != null" >
+        #{fkCreateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="fkFooterId != null" >
+        #{fkFooterId,jdbcType=BIGINT},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=DOUBLE},
+      </if>
+      <if test="costPrice != null" >
+        #{costPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="label != null" >
+        #{label,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ProductionBeanWithBLOBs" >
+    update production
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="field != null" >
+        field = #{field,jdbcType=VARCHAR},
+      </if>
+      <if test="fkClazzId != null" >
+        fk_clazz_id = #{fkClazzId,jdbcType=BIGINT},
+      </if>
+      <if test="fkHeaderId != null" >
+        fk_header_id = #{fkHeaderId,jdbcType=BIGINT},
+      </if>
+      <if test="fkCreateUserId != null" >
+        fk_create_user_id = #{fkCreateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="fkFooterId != null" >
+        fk_footer_id = #{fkFooterId,jdbcType=BIGINT},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=DOUBLE},
+      </if>
+      <if test="costPrice != null" >
+        cost_price = #{costPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="label != null" >
+        label = #{label,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ProductionBeanWithBLOBs" >
+    update production
+    set name = #{name,jdbcType=VARCHAR},
+      field = #{field,jdbcType=VARCHAR},
+      fk_clazz_id = #{fkClazzId,jdbcType=BIGINT},
+      fk_header_id = #{fkHeaderId,jdbcType=BIGINT},
+      fk_create_user_id = #{fkCreateUserId,jdbcType=BIGINT},
+      fk_footer_id = #{fkFooterId,jdbcType=BIGINT},
+      discount = #{discount,jdbcType=DOUBLE},
+      cost_price = #{costPrice,jdbcType=DOUBLE},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=LONGVARCHAR},
+      label = #{label,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ProductionBean" >
+    update production
+    set name = #{name,jdbcType=VARCHAR},
+      field = #{field,jdbcType=VARCHAR},
+      fk_clazz_id = #{fkClazzId,jdbcType=BIGINT},
+      fk_header_id = #{fkHeaderId,jdbcType=BIGINT},
+      fk_create_user_id = #{fkCreateUserId,jdbcType=BIGINT},
+      fk_footer_id = #{fkFooterId,jdbcType=BIGINT},
+      discount = #{discount,jdbcType=DOUBLE},
+      cost_price = #{costPrice,jdbcType=DOUBLE},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

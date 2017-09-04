@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldsmsoft.framework.dao.mybatis.dao.AddressBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.ldsmsoft.framework.dao.mybatis.model.AddressBean" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="fk_user_id" property="fkUserId" jdbcType="BIGINT" />
+    <result column="fk_university_id" property="fkUniversityId" jdbcType="BIGINT" />
+    <result column="fk_build_id" property="fkBuildId" jdbcType="BIGINT" />
+    <result column="detail" property="detail" jdbcType="VARCHAR" />
+    <result column="consignee_name" property="consigneeName" jdbcType="VARCHAR" />
+    <result column="consignee_phone" property="consigneePhone" jdbcType="VARCHAR" />
+    <result column="default" property="default" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fk_user_id, fk_university_id, fk_build_id, detail, consignee_name, consignee_phone, 
+    default, create_time, update_time, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from address
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from address
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.AddressBean" >
+    insert into address (id, fk_user_id, fk_university_id, 
+      fk_build_id, detail, consignee_name, 
+      consignee_phone, default, create_time, 
+      update_time, status)
+    values (#{id,jdbcType=BIGINT}, #{fkUserId,jdbcType=BIGINT}, #{fkUniversityId,jdbcType=BIGINT}, 
+      #{fkBuildId,jdbcType=BIGINT}, #{detail,jdbcType=VARCHAR}, #{consigneeName,jdbcType=VARCHAR}, 
+      #{consigneePhone,jdbcType=VARCHAR}, #{default,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.AddressBean" >
+    insert into address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fkUserId != null" >
+        fk_user_id,
+      </if>
+      <if test="fkUniversityId != null" >
+        fk_university_id,
+      </if>
+      <if test="fkBuildId != null" >
+        fk_build_id,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+      <if test="consigneeName != null" >
+        consignee_name,
+      </if>
+      <if test="consigneePhone != null" >
+        consignee_phone,
+      </if>
+      <if test="default != null" >
+        default,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="fkUserId != null" >
+        #{fkUserId,jdbcType=BIGINT},
+      </if>
+      <if test="fkUniversityId != null" >
+        #{fkUniversityId,jdbcType=BIGINT},
+      </if>
+      <if test="fkBuildId != null" >
+        #{fkBuildId,jdbcType=BIGINT},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeName != null" >
+        #{consigneeName,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneePhone != null" >
+        #{consigneePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="default != null" >
+        #{default,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.AddressBean" >
+    update address
+    <set >
+      <if test="fkUserId != null" >
+        fk_user_id = #{fkUserId,jdbcType=BIGINT},
+      </if>
+      <if test="fkUniversityId != null" >
+        fk_university_id = #{fkUniversityId,jdbcType=BIGINT},
+      </if>
+      <if test="fkBuildId != null" >
+        fk_build_id = #{fkBuildId,jdbcType=BIGINT},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeName != null" >
+        consignee_name = #{consigneeName,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneePhone != null" >
+        consignee_phone = #{consigneePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="default != null" >
+        default = #{default,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.AddressBean" >
+    update address
+    set fk_user_id = #{fkUserId,jdbcType=BIGINT},
+      fk_university_id = #{fkUniversityId,jdbcType=BIGINT},
+      fk_build_id = #{fkBuildId,jdbcType=BIGINT},
+      detail = #{detail,jdbcType=VARCHAR},
+      consignee_name = #{consigneeName,jdbcType=VARCHAR},
+      consignee_phone = #{consigneePhone,jdbcType=VARCHAR},
+      default = #{default,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

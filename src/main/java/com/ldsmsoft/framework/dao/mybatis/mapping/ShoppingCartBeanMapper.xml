@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldsmsoft.framework.dao.mybatis.dao.ShoppingCartBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.ldsmsoft.framework.dao.mybatis.model.ShoppingCartBean" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="fk_production_plan_id" property="fkProductionPlanId" jdbcType="BIGINT" />
+    <result column="fk_user_id" property="fkUserId" jdbcType="BIGINT" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="production_name" property="productionName" jdbcType="VARCHAR" />
+    <result column="production_price" property="productionPrice" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fk_production_plan_id, fk_user_id, amount, create_time, update_time, status, 
+    production_name, production_price
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from shopping_cart
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from shopping_cart
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ShoppingCartBean" >
+    insert into shopping_cart (id, fk_production_plan_id, fk_user_id, 
+      amount, create_time, update_time, 
+      status, production_name, production_price
+      )
+    values (#{id,jdbcType=BIGINT}, #{fkProductionPlanId,jdbcType=BIGINT}, #{fkUserId,jdbcType=BIGINT}, 
+      #{amount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{productionName,jdbcType=VARCHAR}, #{productionPrice,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ShoppingCartBean" >
+    insert into shopping_cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fkProductionPlanId != null" >
+        fk_production_plan_id,
+      </if>
+      <if test="fkUserId != null" >
+        fk_user_id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="productionName != null" >
+        production_name,
+      </if>
+      <if test="productionPrice != null" >
+        production_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="fkProductionPlanId != null" >
+        #{fkProductionPlanId,jdbcType=BIGINT},
+      </if>
+      <if test="fkUserId != null" >
+        #{fkUserId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="productionName != null" >
+        #{productionName,jdbcType=VARCHAR},
+      </if>
+      <if test="productionPrice != null" >
+        #{productionPrice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ShoppingCartBean" >
+    update shopping_cart
+    <set >
+      <if test="fkProductionPlanId != null" >
+        fk_production_plan_id = #{fkProductionPlanId,jdbcType=BIGINT},
+      </if>
+      <if test="fkUserId != null" >
+        fk_user_id = #{fkUserId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="productionName != null" >
+        production_name = #{productionName,jdbcType=VARCHAR},
+      </if>
+      <if test="productionPrice != null" >
+        production_price = #{productionPrice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.ShoppingCartBean" >
+    update shopping_cart
+    set fk_production_plan_id = #{fkProductionPlanId,jdbcType=BIGINT},
+      fk_user_id = #{fkUserId,jdbcType=BIGINT},
+      amount = #{amount,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      production_name = #{productionName,jdbcType=VARCHAR},
+      production_price = #{productionPrice,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

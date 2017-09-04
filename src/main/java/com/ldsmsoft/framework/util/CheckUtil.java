@@ -1,6 +1,6 @@
 package com.ldsmsoft.framework.util;
 
-public class regUtil {
+public class CheckUtil {
 
 	/**
 	 * 字符串是否匹配指定模式
@@ -27,6 +27,18 @@ public class regUtil {
         }else{  
             return false;   
         }  
+    } 
+    /**
+     * 邮箱校验 
+     * @param email
+     * @return
+     */
+    public static boolean checkEmail(String email){  
+    	if(email.matches("^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w{2,3}){1,3})$")){  
+    		return true;  
+    	}else{  
+    		return false;   
+    	}  
     } 
     /**
      * 姓名 校验

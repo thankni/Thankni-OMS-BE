@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ldsmsoft.framework.dao.mybatis.dao.OrderBeanMapper">
+  <resultMap id="BaseResultMap" type="com.ldsmsoft.framework.dao.mybatis.model.OrderBean">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="fk_address_id" jdbcType="INTEGER" property="fkAddressId" />
+    <result column="fk_delivery_id" jdbcType="BIGINT" property="fkDeliveryId" />
+    <result column="fk_user_id" jdbcType="BIGINT" property="fkUserId" />
+    <result column="fk_update_user_id" jdbcType="BIGINT" property="fkUpdateUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ldsmsoft.framework.dao.mybatis.model.OrderBeanWithBLOBs">
+    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
+    <result column="admin_remark" jdbcType="LONGVARCHAR" property="adminRemark" />
+    <result column="courier_remark" jdbcType="LONGVARCHAR" property="courierRemark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_number, price, fk_address_id, fk_delivery_id, fk_user_id, fk_update_user_id, 
+    create_time, update_time, status
+  </sql>
+  <sql id="Blob_Column_List">
+    remark, admin_remark, courier_remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.OrderBeanWithBLOBs">
+    insert into order (id, order_number, price, 
+      fk_address_id, fk_delivery_id, fk_user_id, 
+      fk_update_user_id, create_time, update_time, 
+      status, remark, admin_remark, 
+      courier_remark)
+    values (#{id,jdbcType=BIGINT}, #{orderNumber,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{fkAddressId,jdbcType=INTEGER}, #{fkDeliveryId,jdbcType=BIGINT}, #{fkUserId,jdbcType=BIGINT}, 
+      #{fkUpdateUserId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{remark,jdbcType=LONGVARCHAR}, #{adminRemark,jdbcType=LONGVARCHAR}, 
+      #{courierRemark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.OrderBeanWithBLOBs">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderNumber != null">
+        order_number,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="fkAddressId != null">
+        fk_address_id,
+      </if>
+      <if test="fkDeliveryId != null">
+        fk_delivery_id,
+      </if>
+      <if test="fkUserId != null">
+        fk_user_id,
+      </if>
+      <if test="fkUpdateUserId != null">
+        fk_update_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="adminRemark != null">
+        admin_remark,
+      </if>
+      <if test="courierRemark != null">
+        courier_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="fkAddressId != null">
+        #{fkAddressId,jdbcType=INTEGER},
+      </if>
+      <if test="fkDeliveryId != null">
+        #{fkDeliveryId,jdbcType=BIGINT},
+      </if>
+      <if test="fkUserId != null">
+        #{fkUserId,jdbcType=BIGINT},
+      </if>
+      <if test="fkUpdateUserId != null">
+        #{fkUpdateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="adminRemark != null">
+        #{adminRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="courierRemark != null">
+        #{courierRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.OrderBeanWithBLOBs">
+    update order
+    <set>
+      <if test="orderNumber != null">
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="fkAddressId != null">
+        fk_address_id = #{fkAddressId,jdbcType=INTEGER},
+      </if>
+      <if test="fkDeliveryId != null">
+        fk_delivery_id = #{fkDeliveryId,jdbcType=BIGINT},
+      </if>
+      <if test="fkUserId != null">
+        fk_user_id = #{fkUserId,jdbcType=BIGINT},
+      </if>
+      <if test="fkUpdateUserId != null">
+        fk_update_user_id = #{fkUpdateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="adminRemark != null">
+        admin_remark = #{adminRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="courierRemark != null">
+        courier_remark = #{courierRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ldsmsoft.framework.dao.mybatis.model.OrderBeanWithBLOBs">
+    update order
+    set order_number = #{orderNumber,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      fk_address_id = #{fkAddressId,jdbcType=INTEGER},
+      fk_delivery_id = #{fkDeliveryId,jdbcType=BIGINT},
+      fk_user_id = #{fkUserId,jdbcType=BIGINT},
+      fk_update_user_id = #{fkUpdateUserId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=LONGVARCHAR},
+      admin_remark = #{adminRemark,jdbcType=LONGVARCHAR},
+      courier_remark = #{courierRemark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.OrderBean">
+    update order
+    set order_number = #{orderNumber,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      fk_address_id = #{fkAddressId,jdbcType=INTEGER},
+      fk_delivery_id = #{fkDeliveryId,jdbcType=BIGINT},
+      fk_user_id = #{fkUserId,jdbcType=BIGINT},
+      fk_update_user_id = #{fkUpdateUserId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ldsmsoft.framework.dao.mybatis.model.OrderBean">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="fk_address_id" jdbcType="INTEGER" property="fkAddressId" />
+    <result column="fk_delivery_id" jdbcType="BIGINT" property="fkDeliveryId" />
+    <result column="fk_user_id" jdbcType="BIGINT" property="fkUserId" />
+    <result column="fk_update_user_id" jdbcType="BIGINT" property="fkUpdateUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ldsmsoft.framework.dao.mybatis.model.OrderBeanWithBLOBs">
+    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
+    <result column="admin_remark" jdbcType="LONGVARCHAR" property="adminRemark" />
+    <result column="courier_remark" jdbcType="LONGVARCHAR" property="courierRemark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_number, price, fk_address_id, fk_delivery_id, fk_user_id, fk_update_user_id, 
+    create_time, update_time, status
+  </sql>
+  <sql id="Blob_Column_List">
+    remark, admin_remark, courier_remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.OrderBeanWithBLOBs">
+    insert into order (id, order_number, price, 
+      fk_address_id, fk_delivery_id, fk_user_id, 
+      fk_update_user_id, create_time, update_time, 
+      status, remark, admin_remark, 
+      courier_remark)
+    values (#{id,jdbcType=BIGINT}, #{orderNumber,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{fkAddressId,jdbcType=INTEGER}, #{fkDeliveryId,jdbcType=BIGINT}, #{fkUserId,jdbcType=BIGINT}, 
+      #{fkUpdateUserId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{remark,jdbcType=LONGVARCHAR}, #{adminRemark,jdbcType=LONGVARCHAR}, 
+      #{courierRemark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.OrderBeanWithBLOBs">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderNumber != null">
+        order_number,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="fkAddressId != null">
+        fk_address_id,
+      </if>
+      <if test="fkDeliveryId != null">
+        fk_delivery_id,
+      </if>
+      <if test="fkUserId != null">
+        fk_user_id,
+      </if>
+      <if test="fkUpdateUserId != null">
+        fk_update_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="adminRemark != null">
+        admin_remark,
+      </if>
+      <if test="courierRemark != null">
+        courier_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="fkAddressId != null">
+        #{fkAddressId,jdbcType=INTEGER},
+      </if>
+      <if test="fkDeliveryId != null">
+        #{fkDeliveryId,jdbcType=BIGINT},
+      </if>
+      <if test="fkUserId != null">
+        #{fkUserId,jdbcType=BIGINT},
+      </if>
+      <if test="fkUpdateUserId != null">
+        #{fkUpdateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="adminRemark != null">
+        #{adminRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="courierRemark != null">
+        #{courierRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.OrderBeanWithBLOBs">
+    update order
+    <set>
+      <if test="orderNumber != null">
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="fkAddressId != null">
+        fk_address_id = #{fkAddressId,jdbcType=INTEGER},
+      </if>
+      <if test="fkDeliveryId != null">
+        fk_delivery_id = #{fkDeliveryId,jdbcType=BIGINT},
+      </if>
+      <if test="fkUserId != null">
+        fk_user_id = #{fkUserId,jdbcType=BIGINT},
+      </if>
+      <if test="fkUpdateUserId != null">
+        fk_update_user_id = #{fkUpdateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="adminRemark != null">
+        admin_remark = #{adminRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="courierRemark != null">
+        courier_remark = #{courierRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ldsmsoft.framework.dao.mybatis.model.OrderBeanWithBLOBs">
+    update order
+    set order_number = #{orderNumber,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      fk_address_id = #{fkAddressId,jdbcType=INTEGER},
+      fk_delivery_id = #{fkDeliveryId,jdbcType=BIGINT},
+      fk_user_id = #{fkUserId,jdbcType=BIGINT},
+      fk_update_user_id = #{fkUpdateUserId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=LONGVARCHAR},
+      admin_remark = #{adminRemark,jdbcType=LONGVARCHAR},
+      courier_remark = #{courierRemark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.OrderBean">
+    update order
+    set order_number = #{orderNumber,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      fk_address_id = #{fkAddressId,jdbcType=INTEGER},
+      fk_delivery_id = #{fkDeliveryId,jdbcType=BIGINT},
+      fk_user_id = #{fkUserId,jdbcType=BIGINT},
+      fk_update_user_id = #{fkUpdateUserId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

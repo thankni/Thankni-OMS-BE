@@ -3,12 +3,28 @@ package com.ldsmsoft.framework.util;
 import java.io.IOException;
 import java.sql.Clob;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Util {
 	
-	public static boolean isEmpty(String str)
-	{
-	  return (str == null) || ("".equals(str.trim()));
+	/**
+	 * 生成哈希值
+	 * @param map
+	 * @return
+	 */
+	public static String getHashcode(List<String> list){
+		String code = "";
+		for (String str : list) {
+			code+=str;
+		}
+		if(!"".equals(code)){
+			try {
+				code = MD5Util.md5Encode(code);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return code;
 	}
 	
 	/**

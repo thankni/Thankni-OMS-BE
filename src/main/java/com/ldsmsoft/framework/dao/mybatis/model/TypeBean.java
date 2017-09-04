@@ -1,10 +1,10 @@
 package com.ldsmsoft.framework.dao.mybatis.model;
 
-import java.math.BigDecimal;
+import java.lang.Long;
 import java.util.Date;
 
 public class TypeBean {
-    private BigDecimal typeId;
+    private Long typeId;
 
     private String typeName;
 
@@ -12,19 +12,19 @@ public class TypeBean {
 
     private Date createdtm;
 
-    private BigDecimal createuser;
+    private Long createuser;
 
     private Date updatedtm;
 
-    private BigDecimal updateuser;
+    private Long updateuser;
 
     private String status;
 
-    public BigDecimal getTypeId() {
+    public Long getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(BigDecimal typeId) {
+    public void setTypeId(Long typeId) {
         this.typeId = typeId;
     }
 
@@ -52,11 +52,11 @@ public class TypeBean {
         this.createdtm = createdtm;
     }
 
-    public BigDecimal getCreateuser() {
+    public Long getCreateuser() {
         return createuser;
     }
 
-    public void setCreateuser(BigDecimal createuser) {
+    public void setCreateuser(Long createuser) {
         this.createuser = createuser;
     }
 
@@ -68,11 +68,11 @@ public class TypeBean {
         this.updatedtm = updatedtm;
     }
 
-    public BigDecimal getUpdateuser() {
+    public Long getUpdateuser() {
         return updateuser;
     }
 
-    public void setUpdateuser(BigDecimal updateuser) {
+    public void setUpdateuser(Long updateuser) {
         this.updateuser = updateuser;
     }
 

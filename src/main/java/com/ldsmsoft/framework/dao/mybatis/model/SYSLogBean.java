@@ -1,10 +1,10 @@
 package com.ldsmsoft.framework.dao.mybatis.model;
 
-import java.math.BigDecimal;
+import java.lang.Long;
 import java.util.Date;
 
 public class SYSLogBean {
-    private BigDecimal logId;
+    private Long logId;
 
     private Object argsIn;
 
@@ -20,13 +20,13 @@ public class SYSLogBean {
 
     private String clientid;
 
-    private BigDecimal userId;
+    private Long userId;
 
-    public BigDecimal getLogId() {
+    public Long getLogId() {
         return logId;
     }
 
-    public void setLogId(BigDecimal logId) {
+    public void setLogId(Long logId) {
         this.logId = logId;
     }
 
@@ -86,11 +86,11 @@ public class SYSLogBean {
         this.clientid = clientid == null ? null : clientid.trim();
     }
 
-    public BigDecimal getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(BigDecimal userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 }

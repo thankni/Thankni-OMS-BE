@@ -31,11 +31,22 @@ public interface UserService {
 	HashMap<String, Object> getRegInfo(String loginName, String password,String token);
 
 	/**
+	 * 注册
+	 * @param userName
+	 * @param tel
+	 * @param loginName
+	 * @param password
+	 * @return
+	 */
+	HashMap<String, Object> reg(String userName, String tel, String loginName, String password);
+
+	/**
 	 * 修改注册信息
 	 * @param bean
 	 * @return
 	 */
-	HashMap<String, Object> eidtRegInfo(SYSUserBean bean);
+	HashMap<String, Object> eidtRegInfo(Long userId,String userName,String idcard,String tel,String email,String password,String token,String status);
+
 
 
 }

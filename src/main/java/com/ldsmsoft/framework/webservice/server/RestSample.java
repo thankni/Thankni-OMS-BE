@@ -12,6 +12,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import com.ldsmsoft.framework.dao.mybatis.model.ProductionBeanWithBLOBs;
+import com.ldsmsoft.framework.dao.mybatis.model.ProductionPlanBean;
+
 public interface RestSample {  
   
     @GET  //@GET、@PUT、@POST、@DELETE：标注方法的HTTP请求类型。
@@ -23,7 +26,73 @@ public interface RestSample {
     @Path("/request/{param}")  
     public String doRequest(@PathParam("param") String param,@Context HttpServletRequest servletRequest,  
             @Context HttpServletResponse servletResponse);  
-   
+
+    /**
+     * 获取商品分类(多条)
+     * @return
+     */
+    @GET  
+    @Path("/QU3001")  
+    @Produces({ MediaType.APPLICATION_JSON })   
+    HashMap<String, Object> getClazzs();
+    /**
+     * 获取商品(多条)
+     * @return
+     */
+    @GET  
+    @Path("/QU3002/{clazzId}/{page}/{pageSize}")  
+    @Produces({ MediaType.APPLICATION_JSON })   
+    HashMap<String, Object> getProductions(String clazzId,String page,String pageSize);
+    /**
+     * 获取商品(单条)
+     * @return
+     */
+    @GET  
+    @Path("/QU3003/{productionId}")  
+    @Produces({ MediaType.APPLICATION_JSON })   
+    HashMap<String, Object> getProduction(String productionId);
+    /**
+     * 获取商品计划(多条)
+     * @return
+     */
+    @GET  
+    @Path("/QU3004/{productionId}/{page}/{pageSize}")  
+    @Produces({ MediaType.APPLICATION_JSON })   
+    HashMap<String, Object> getProductionPlans(String productionId,String page,String pageSize);
+    /**
+     * 新增商品
+     * @return
+     */
+    @GET  
+    @Path("/AD3001")  
+    @Produces(MediaType.APPLICATION_JSON)   
+    HashMap<String, Object> addProduction(ProductionBeanWithBLOBs production);
+    /**
+     * 修改商品
+     * @return
+     */
+    @GET  
+    @Path("/ED3001")  
+    @Produces(MediaType.APPLICATION_JSON)   
+    HashMap<String, Object> eidtProduction(ProductionBeanWithBLOBs production);
+    /**
+     * 新增商品计划
+     * @return
+     */
+    @GET  
+    @Path("/AD3002")  
+    @Produces(MediaType.APPLICATION_JSON)   
+    HashMap<String, Object> addProductionPlan(ProductionPlanBean productionPlan);
+    /**
+     * 新增商品计划
+     * @return
+     */
+    @GET  
+    @Path("/ED3002")  
+    @Produces(MediaType.APPLICATION_JSON)   
+    HashMap<String, Object> editProductionPlan(ProductionPlanBean productionPlan);
+    
+    
    /**
     * 注册
     * @param name 姓名
@@ -34,10 +103,27 @@ public interface RestSample {
     * @return
     */
    @GET  
-   @Path("/DE8001/{name}/{idcard}/{icno}/{tel}/{password}")  
+   @Path("/DE1001/{userName}/{tel}/{loginName}/{password}")  
    @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-   HashMap<String, Object> regUser(@PathParam("name")String name, @PathParam("loginName")String loginName,@PathParam("icno")String icno,@PathParam("tel")String tel, @PathParam("password")String password);
+   HashMap<String, Object> regUser(@PathParam("userName")String name, @PathParam("tel")String tel, @PathParam("loginName")String loginName,@PathParam("password")String password);
 
+   /**
+    * 修改注册信息
+    * @param userId
+    * @param userName
+    * @param idcard
+    * @param tel
+    * @param email
+    * @param password
+    * @param token
+    * @param status
+    * @return
+    */
+   @GET  
+   @Path("/DE1002/{clientId}/{clientSecret}/{userId}/{userName}/{idcard}/{tel}/{email}/{password}/{token}/{status}")  
+   @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })   
+   HashMap<String, Object> eidtRegInfo(@PathParam("clientId")String clientId, @PathParam("clientSecret")String clientSecret,String userId, String userName, String idcard, String tel, String email,
+		   String password, String token, String status);
    /**
     * 登录
     * @param clientId 授权账号
@@ -47,10 +133,21 @@ public interface RestSample {
     * @return
     */
    @GET  
-   @Path("/DE8002/{clientId}/{clientSecret}/{loginName}/{password}/{tk}")  
+   @Path("/DE1003/{clientId}/{clientSecret}/{loginName}/{password}/{tk}")  
    @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
    HashMap<String, Object> getPersonInfo(@PathParam("clientId")String clientId, @PathParam("clientSecret")String clientSecret, @PathParam("loginName")String loginName, @PathParam("password")String password, @PathParam("tk")String token);
 
-HashMap<String, Object> getPersonPower(String token, String clientId, String clientSecret, String userId);
-   
+/*   *//**
+    * 获取用户权限
+    * @param token
+    * @param clientId
+    * @param clientSecret
+    * @param userId
+    * @return
+    *//*
+   @GET  
+   @Path("/DE1004/{token}/{clientId}/{clientSecret}/{userId}")  
+   @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })   
+   HashMap<String, Object> getPersonPower(@PathParam("token")String token, @PathParam("clientId")String clientId, @PathParam("clientSecret")String clientSecret, @PathParam("userId")String userId);
+*/
 }  

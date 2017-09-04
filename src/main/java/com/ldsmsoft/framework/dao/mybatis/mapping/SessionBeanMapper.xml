@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldsmsoft.framework.dao.mybatis.dao.SessionBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.ldsmsoft.framework.dao.mybatis.model.SessionBean" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="session_key" property="sessionKey" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="unionid" property="unionid" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="expire" property="expire" jdbcType="TIMESTAMP" />
+    <result column="app_key" property="appKey" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, session_key, openid, unionid, token, expire, app_key
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from session
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from session
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SessionBean" >
+    insert into session (id, user_id, session_key, 
+      openid, unionid, token, 
+      expire, app_key)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{sessionKey,jdbcType=VARCHAR}, 
+      #{openid,jdbcType=VARCHAR}, #{unionid,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
+      #{expire,jdbcType=TIMESTAMP}, #{appKey,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SessionBean" >
+    insert into session
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="sessionKey != null" >
+        session_key,
+      </if>
+      <if test="openid != null" >
+        openid,
+      </if>
+      <if test="unionid != null" >
+        unionid,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="expire != null" >
+        expire,
+      </if>
+      <if test="appKey != null" >
+        app_key,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="sessionKey != null" >
+        #{sessionKey,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null" >
+        #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="expire != null" >
+        #{expire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appKey != null" >
+        #{appKey,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SessionBean" >
+    update session
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="sessionKey != null" >
+        session_key = #{sessionKey,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null" >
+        unionid = #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="expire != null" >
+        expire = #{expire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appKey != null" >
+        app_key = #{appKey,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ldsmsoft.framework.dao.mybatis.model.SessionBean" >
+    update session
+    set user_id = #{userId,jdbcType=BIGINT},
+      session_key = #{sessionKey,jdbcType=VARCHAR},
+      openid = #{openid,jdbcType=VARCHAR},
+      unionid = #{unionid,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      expire = #{expire,jdbcType=TIMESTAMP},
+      app_key = #{appKey,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
